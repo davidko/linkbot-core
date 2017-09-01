@@ -1,0 +1,3 @@
+[submodule "linkbot-interfaces"]
+	path = linkbot-interfaces
+	url = https://github.com/BaroboRobotics/linkbot-interfaces

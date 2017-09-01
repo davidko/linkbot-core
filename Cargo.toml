@@ -1,0 +1,11 @@
+[package]
+name = "liblinkbotrs"
+version = "0.0.1"
+authors = ["David Ko <david@barobo.com>"]
+build = "build.rs"
+
+[dependencies]
+protobuf = "*"
+
+[build-dependencies]
+protoc-rust = "*"
