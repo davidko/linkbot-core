@@ -10,7 +10,7 @@ pub struct Robot {
 }
 
 impl Robot {
-    pub fn new_from_daemon(serial_id: String, d: &daemon::DaemonClient) -> Robot {
+    pub fn new_from_daemon(serial_id: String, d: &daemon::DaemonProxy) -> Robot {
         Robot{ inner: Rc::new( RefCell::new( 
                     Inner::new_from_daemon(serial_id, d)
                     )),
@@ -21,12 +21,12 @@ impl Robot {
 struct Inner
 {
     serial_id: String,
-    daemon: daemon::DaemonClient,
+    daemon: daemon::DaemonProxy,
     seq: u32,
 }
 
 impl Inner {
-    fn new_from_daemon(serial_id: String, d: &daemon::DaemonClient) -> Inner {
+    fn new_from_daemon(serial_id: String, d: &daemon::DaemonProxy) -> Inner {
         Inner{ serial_id: serial_id,
                daemon: d.clone(),
                seq: rand::random(),

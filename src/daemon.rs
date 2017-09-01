@@ -10,16 +10,16 @@ use protos::daemon as daemon_pb;
 use protos::commontypes as common_pb;
 use super::robot;
 
-//static DAEMON_CLIENT: Option<DaemonClient> = None;
+//static DAEMON_CLIENT: Option<DaemonProxy> = None;
 
 #[derive(Clone)]
-pub struct DaemonClient {
+pub struct DaemonProxy {
     inner: Rc<RefCell<Inner>>
 }
 
-impl DaemonClient {
-    pub fn new() -> DaemonClient {
-        DaemonClient{inner: Rc::new( RefCell::new( Inner::new() ) )}
+impl DaemonProxy {
+    pub fn new() -> DaemonProxy {
+        DaemonProxy{inner: Rc::new( RefCell::new( Inner::new() ) )}
     }
 
     pub fn set_write_callback<F>(&mut self, cb: F) 
@@ -29,7 +29,7 @@ impl DaemonClient {
         self.inner.borrow_mut().set_write_callback(cb)
     }
 
-    pub fn deliver(&mut self, buf: Vec<u8>) {
+    pub fn deliver(&mut self, buf: &Vec<u8>) -> Result<(), String> {
         self.inner.borrow_mut().deliver(buf)
     }
 
@@ -40,7 +40,7 @@ impl DaemonClient {
         self.inner.borrow_mut().get_version_string(cb)
     }
 
-    pub fn get_robot(&mut self, serial_id: String) -> robot::Robot {
+    pub fn get_robot(&mut self, serial_id: &str) -> robot::Robot {
         self.inner.borrow_mut().get_robot(serial_id, self.clone())
     }
 }
@@ -69,7 +69,22 @@ impl Inner{
         self.write_cb = Some(Box::new(cb));
     }
 
-    pub fn deliver(&mut self, buf: Vec<u8>) {
+    pub fn deliver(&mut self, buf: &Vec<u8>) -> Result<(), String> {
+        // The message better be a DaemonToClient message
+        let mut d_to_c = daemon_pb::DaemonToClient::new();
+        if d_to_c.merge_from_bytes(buf.as_slice()).is_err() {
+            Err(String::from("Could not parse DaemonToClient message."))
+        } else if d_to_c.has_rpcReply() {
+            self.handle_rpc_reply( d_to_c.take_rpcReply() )
+        } else if d_to_c.has_receive() {
+            self.handle_receive(d_to_c.take_receive())
+        } else if d_to_c.has_dongleEvent() {
+            self.handle_dongle_event(d_to_c.take_dongleEvent())
+        } else if d_to_c.has_robotEvent() {
+            self.handle_robot_event(d_to_c.take_robotEvent())
+        } else {
+            Err(String::from("Unknown DaemonToClient arg."))
+        }
     }
 
     pub fn get_version_string<F>(&mut self, mut cb: F) -> Result<(), String> 
@@ -89,14 +104,14 @@ impl Inner{
         self.rpc_request(request)
     }
 
-    pub fn get_robot(&mut self, serial_id: String, daemon: DaemonClient) -> robot::Robot {
+    pub fn get_robot(&mut self, serial_id: &str, daemon: DaemonProxy) -> robot::Robot {
         // See if there is a robot in our map first
-        if let Some(ref r) = self.robots.get(&serial_id) {
+        if let Some(ref r) = self.robots.get(serial_id) {
             return (*r).clone();
         } 
     
-        let r = robot::Robot::new_from_daemon(serial_id.clone(), &daemon);
-        self.robots.insert(serial_id, r.clone());
+        let r = robot::Robot::new_from_daemon(String::from(serial_id), &daemon);
+        self.robots.insert(String::from(serial_id), r.clone());
         r
     }
 
@@ -130,5 +145,21 @@ impl Inner{
         } else {
             Err(String::from("Daemon client write callback not set."))
         }
+    }
+
+    fn handle_rpc_reply(&mut self, reply: daemon_pb::RpcReply) -> Result<(),String> {
+        unimplemented!();
+    }
+
+    fn handle_receive(&mut self, receive: daemon_pb::ReceiveTransmission) -> Result<(), String> {
+        unimplemented!();
+    }
+
+    fn handle_dongle_event(&mut self, event: daemon_pb::DongleEvent) -> Result<(), String> {
+        unimplemented!();
+    }
+
+    fn handle_robot_event(&mut self, event: daemon_pb::RobotEvent) -> Result<(), String> {
+        unimplemented!();
     }
 }
