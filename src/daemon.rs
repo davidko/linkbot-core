@@ -8,6 +8,7 @@ use std::sync::{Arc, Mutex};
 use protobuf::Message;
 use protos::daemon as daemon_pb;
 use protos::commontypes as common_pb;
+use super::robot;
 
 //static DAEMON_CLIENT: Option<DaemonClient> = None;
 
@@ -39,8 +40,8 @@ impl DaemonClient {
         self.inner.borrow_mut().get_version_string(cb)
     }
 
-    pub fn get_robot(&mut self, serial_id: String) {
-
+    pub fn get_robot(&mut self, serial_id: String) -> robot::Robot {
+        self.inner.borrow_mut().get_robot(serial_id, self.clone())
     }
 }
 
@@ -48,6 +49,7 @@ struct Inner {
     write_cb: Option<Box<FnMut(Vec<u8>)>>,
     seq: u32,
     requests: HashMap<u32, Box<FnMut(daemon_pb::RpcReply)>>,
+    robots: HashMap<String, robot::Robot>,
 }
 
 impl Inner{
@@ -55,6 +57,7 @@ impl Inner{
         Inner{ write_cb: None,
                seq: rand::random(),
                requests: HashMap::new(),
+               robots: HashMap::new(),
         }
     }
 
@@ -84,6 +87,17 @@ impl Inner{
         let mut request = daemon_pb::RpcRequest::new();
         request.set_getDaemonVersionString(msg);
         self.rpc_request(request)
+    }
+
+    pub fn get_robot(&mut self, serial_id: String, daemon: DaemonClient) -> robot::Robot {
+        // See if there is a robot in our map first
+        if let Some(ref r) = self.robots.get(&serial_id) {
+            return (*r).clone();
+        } 
+    
+        let r = robot::Robot::new_from_daemon(serial_id.clone(), &daemon);
+        self.robots.insert(serial_id, r.clone());
+        r
     }
 
     pub fn add_robot_refs<F>(&mut self, serial_ids: Vec<String>, cb: F) -> Result<(), String>
