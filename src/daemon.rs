@@ -91,17 +91,16 @@ impl Inner{
         where F: FnMut(String),
               F: 'static
     {
-        self.requests.insert(self.seq, Box::new( move |mut reply| {
-            if ! reply.has_getDaemonVersionString() {
-                println!("Warning: Got version string reply with no data");
-            } else {
-                cb( reply.take_getDaemonVersionString().take_value() );
-            }
-        }));
         let msg = daemon_pb::getDaemonVersionString_In::new();
         let mut request = daemon_pb::RpcRequest::new();
         request.set_getDaemonVersionString(msg);
-        self.rpc_request(request)
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getDaemonVersionString() {
+                warn!("Warning: Got version string reply with no data");
+            } else {
+                cb( reply.take_getDaemonVersionString().take_value() );
+            }
+        })
     }
 
     pub fn get_robot(&mut self, serial_id: &str, daemon: DaemonProxy) -> robot::Robot {
@@ -115,7 +114,7 @@ impl Inner{
         r
     }
 
-    pub fn add_robot_refs<F>(&mut self, serial_ids: Vec<String>, cb: F) -> Result<(), String>
+    pub fn add_robot_refs<F>(&mut self, serial_ids: Vec<String>, mut cb: F) -> Result<(), String>
         where F: FnMut(),
               F: 'static
     {
@@ -127,17 +126,25 @@ impl Inner{
         }
         let mut request = daemon_pb::RpcRequest::new();
         request.set_addRobotRefs(msg);
-        self.rpc_request(request)
+        self.rpc_request(request, move |_| { cb(); })
     }
 
-    fn rpc_request(&mut self, request: daemon_pb::RpcRequest) -> Result<(), String> {
+    fn rpc_request<F>(&mut self, 
+                      mut request: daemon_pb::RpcRequest,
+                      cb: F) -> Result<(), String> 
+        where F: FnMut(daemon_pb::RpcReply),
+              F: 'static
+    {
         // Build a ClientToDaemon message
+        request.set_requestId(self.seq);
         let mut msg = daemon_pb::ClientToDaemon::new();
         msg.set_rpcRequest(request);
         // Encode it and send it to the write callback
-        if let Some(ref mut cb) = self.write_cb {
+        if let Some(ref mut write_cb) = self.write_cb {
             if let Ok(data) = msg.write_to_bytes() {
-                cb(data);
+                self.requests.insert(self.seq, Box::new(cb));
+                self.seq += 1;
+                write_cb(data);
                 Ok(())
             } else {
                 Err(String::from("daemon::rpc_request: Could not encode ClientToDaemon message"))

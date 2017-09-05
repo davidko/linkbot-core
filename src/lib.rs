@@ -1,4 +1,5 @@
 
+#[macro_use] extern crate log;
 extern crate protobuf;
 extern crate rand;
 
@@ -15,12 +16,15 @@ pub use robot::{Robot};
 
 #[no_mangle]
 pub extern fn daemon_new() -> *mut DaemonProxy {
+    //! Create and return a handle to a daemon proxy
     let d = DaemonProxy::new();
     Box::into_raw( Box::new(d) )
 }
 
 #[no_mangle]
-pub extern fn daemon_set_write_callback(daemon: *mut DaemonProxy, cb: extern fn(Vec<u8>)) {
+pub extern fn daemon_set_write_callback(daemon: *mut DaemonProxy, 
+                                        cb: extern fn(Vec<u8>)) {
+    //! Set the function the daemon will use to send messages to the Daemon-Server.
     let mut d = unsafe {
         Box::from_raw(daemon)
     };
@@ -33,7 +37,10 @@ pub extern fn daemon_set_write_callback(daemon: *mut DaemonProxy, cb: extern fn(
 }
 
 #[no_mangle]
-pub extern fn daemon_deliver(daemon: *mut DaemonProxy, buffer: *mut u8, len: usize) {
+pub extern fn daemon_deliver(daemon: *mut DaemonProxy, 
+                             buffer: *mut u8, 
+                             len: usize) {
+    //! Pass messages coming from the Daemon-Server to this function
     let mut d = unsafe {
         Box::from_raw(daemon)
     };
@@ -51,7 +58,9 @@ pub extern fn daemon_deliver(daemon: *mut DaemonProxy, buffer: *mut u8, len: usi
 }
 
 #[no_mangle]
-pub extern fn daemon_get_robot(daemon: *mut DaemonProxy, serial_id: *mut c_char) -> *mut Robot {
+pub extern fn daemon_get_robot(daemon: *mut DaemonProxy, 
+                               serial_id: *mut c_char) -> *mut Robot {
+    //! Get a handle to a robot object from the daemon proxy
     let mut d = unsafe {
         Box::from_raw(daemon)
     };
