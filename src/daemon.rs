@@ -43,6 +43,15 @@ impl DaemonProxy {
     pub fn get_robot(&mut self, serial_id: &str) -> robot::Robot {
         self.inner.borrow_mut().get_robot(serial_id, self.clone())
     }
+
+    pub fn transmit<F>(&mut self, 
+                       payload: daemon_pb::transmit_In,
+                       cb: F) -> Result<(), String>
+        where F: FnMut(daemon_pb::Status),
+              F: 'static
+    {
+        self.inner.borrow_mut().transmit(payload, cb)
+    }
 }
 
 struct Inner {
@@ -108,7 +117,11 @@ impl Inner{
         if let Some(ref r) = self.robots.get(serial_id) {
             return (*r).clone();
         } 
-    
+        
+        // No such robot allocated yet. First, send a "add_robot_refs" message to the daemon server
+        self.add_robot_refs(vec![ String::from(serial_id), ], 
+                            || { });
+        // Create a new robot object
         let r = robot::Robot::new_from_daemon(String::from(serial_id), &daemon);
         self.robots.insert(String::from(serial_id), r.clone());
         r
@@ -154,12 +167,57 @@ impl Inner{
         }
     }
 
-    fn handle_rpc_reply(&mut self, reply: daemon_pb::RpcReply) -> Result<(),String> {
-        unimplemented!();
+    pub fn transmit<F>(&mut self, 
+                       payload: daemon_pb::transmit_In,
+                       mut cb: F) -> Result<(), String>
+        where F: FnMut(daemon_pb::Status),
+              F: 'static
+    {
+        let mut request = daemon_pb::RpcRequest::new();
+        request.set_transmit(payload);
+        self.rpc_request(request, move|mut reply| {
+            if reply.has_transmit() {
+                cb(reply.take_transmit().get_status());
+            } else {
+                warn!("Expected status in 'transmit()' reply.");
+            }
+        })
     }
 
-    fn handle_receive(&mut self, receive: daemon_pb::ReceiveTransmission) -> Result<(), String> {
-        unimplemented!();
+    fn handle_rpc_reply(&mut self, reply: daemon_pb::RpcReply) -> Result<(),String> {
+        // See if we have a matching request waiting
+        let request_id = reply.get_requestId();
+        if let Some(mut cb) = self.requests.remove(&request_id) {
+            println!("Daemon proxy hadling RPC reply...");
+            cb(reply);
+            Ok(())
+        } else {
+            Err(String::from("Received unsolicited RpcReply."))
+        }
+    }
+
+    fn handle_receive(&mut self, mut receive: daemon_pb::ReceiveTransmission) -> Result<(), String> {
+        // Pass this message along to the correct robot
+        // First, lets figure out which robot this message is addressed to.
+        if ! receive.has_serialId() {
+            Err(String::from("Received transmission with no destination serial id."))
+        } else {
+            if ! receive.has_payload() {
+                Err(String::from(
+                        "Received transmission with no payload." ))
+            } else {
+                let payload = receive.take_payload();
+                let serial_id = receive.take_serialId().take_value();
+                if let Some(ref mut robot) = self.robots.get_mut(&serial_id) {
+                    println!("Daemon proxy delivering payload to robot object...");
+                    robot.deliver(payload)
+                } else {
+                    Err(String::from(
+                            format!("Received transmission for unknown robot: {}",
+                                    serial_id) ))
+                }
+            }
+        }
     }
 
     fn handle_dongle_event(&mut self, event: daemon_pb::DongleEvent) -> Result<(), String> {
