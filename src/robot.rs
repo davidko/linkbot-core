@@ -27,6 +27,69 @@ impl Robot {
         self.inner.borrow_mut().deliver(payload)
     }
 
+    pub fn get_accelerometer_data<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(f32, f32, f32),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_accelerometer_data(cb)
+    }
+
+    pub fn get_battery_voltage<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(f32),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_battery_voltage(cb)
+    }
+
+    pub fn get_button_state<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(u32),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_button_state(cb)
+    }
+
+    pub fn get_buzzer_frequency<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(f32),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_buzzer_frequency(cb)
+    }
+
+    pub fn get_encoder_values<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(u32, Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_encoder_values(cb)
+    }
+
+    pub fn get_firmware_version_string<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(String),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_firmware_version_string(cb)
+    }
+
+    pub fn get_form_factor<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(robot_pb::FormFactor),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_form_factor(cb)
+    }
+
+    pub fn get_joint_states<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(u32, Vec<robot_pb::JointState>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_joint_states(cb)
+    }
+
+    pub fn get_led_color<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(u8, u8, u8),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_led_color(cb)
+    }
+
     pub fn set_led_color<F>(&mut self, 
                             red: u8, 
                             green: u8, 
@@ -97,6 +160,172 @@ impl Inner {
             if status != daemon_pb::Status::OK {
                 warn!("transmit received error status: {}", status);
             }
+        })
+    }
+
+    fn get_accelerometer_data<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(f32, f32, f32),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getAccelerometerData( 
+            robot_pb::getAccelerometerData_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getAccelerometerData() {
+                warn!("Reply has no accelerometer data.");
+                return;
+            }
+            let data = reply.take_getAccelerometerData();
+            cb( data.get_x(),
+                data.get_y(),
+                data.get_z() );
+        })
+    }
+
+    fn get_battery_voltage<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(f32),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getBatteryVoltage( 
+            robot_pb::getBatteryVoltage_In::new()
+            );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_getBatteryVoltage() {
+                warn!("Reply has no battery voltage data.");
+                return;
+            }
+            cb(reply.get_getBatteryVoltage().get_v());
+        })
+    }
+
+    fn get_button_state<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(u32),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getButtonState( 
+            robot_pb::getButtonState_In::new()
+            );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_getButtonState() {
+                warn!("Reply has no button state data.");
+                return;
+            }
+            cb(reply.get_getButtonState().get_mask());
+        })
+    }
+
+    fn get_buzzer_frequency<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(f32),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getBuzzerFrequency( 
+            robot_pb::getBuzzerFrequency_In::new()
+            );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_getBuzzerFrequency() {
+                warn!("Reply has no buzzer frequency data.");
+                return;
+            }
+            cb(reply.get_getBuzzerFrequency().get_value());
+        })
+    }
+
+    fn get_encoder_values<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(u32, Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getEncoderValues( 
+            robot_pb::getEncoderValues_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getEncoderValues() {
+                warn!("Reply has no encoder data.");
+                return;
+            }
+            let mut data = reply.take_getEncoderValues();
+            cb(data.get_timestamp(), data.take_values());
+        })
+    }
+
+    fn get_firmware_version_string<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(String),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getFirmwareVersionString( 
+            robot_pb::getFirmwareVersionString_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getFirmwareVersionString() {
+                warn!("Reply has no firmware version string data.");
+                return;
+            }
+            let mut data = reply.take_getFirmwareVersionString();
+            cb(data.take_value());
+        })
+    }
+
+    fn get_form_factor<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(robot_pb::FormFactor),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getFormFactor( 
+            robot_pb::getFormFactor_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getFormFactor() {
+                warn!("Reply has no form factor data.");
+                return;
+            }
+            let data = reply.take_getFormFactor();
+            cb(data.get_value());
+        })
+    }
+
+    fn get_joint_states<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(u32, Vec<robot_pb::JointState>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getJointStates( 
+            robot_pb::getJointStates_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getJointStates() {
+                warn!("Reply has no form factor data.");
+                return;
+            }
+            let mut data = reply.take_getJointStates();
+            cb(data.get_timestamp(), data.take_values());
+        })
+    }
+
+    fn get_led_color<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(u8, u8, u8),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getLedColor( 
+            robot_pb::getLedColor_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getLedColor() {
+                warn!("Reply has no form factor data.");
+                return;
+            }
+            let data = reply.take_getLedColor();
+            let value = data.get_value();
+            cb(
+                ((value >> 16)&0xff) as u8,
+                ((value >> 8)&0xff) as u8,
+                (value&0xff) as u8
+                );
         })
     }
 

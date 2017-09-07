@@ -7,10 +7,6 @@ mod protos;
 mod daemon;
 mod robot;
 
-use std::ffi::CString;
-use std::mem;
-use std::os::raw::c_char;
-
 pub use daemon::{DaemonProxy};
 pub use robot::{Robot};
 

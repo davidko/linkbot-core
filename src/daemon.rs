@@ -3,7 +3,6 @@ use rand;
 use std::collections::HashMap;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::sync::{Arc, Mutex};
 
 use protobuf::Message;
 use protos::daemon as daemon_pb;
@@ -120,7 +119,7 @@ impl Inner{
         
         // No such robot allocated yet. First, send a "add_robot_refs" message to the daemon server
         self.add_robot_refs(vec![ String::from(serial_id), ], 
-                            || { });
+                            || { }).unwrap();
         // Create a new robot object
         let r = robot::Robot::new_from_daemon(String::from(serial_id), &daemon);
         self.robots.insert(String::from(serial_id), r.clone());
@@ -225,6 +224,7 @@ impl Inner{
     }
 
     fn handle_robot_event(&mut self, event: daemon_pb::RobotEvent) -> Result<(), String> {
-        unimplemented!();
+        info!("Received unhandled robot event.");
+        Ok(())
     }
 }
