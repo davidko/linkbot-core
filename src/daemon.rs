@@ -4,6 +4,8 @@ use std::collections::HashMap;
 use std::rc::Rc;
 use std::cell::RefCell;
 
+use std::sync::{Arc, Mutex};
+
 use protobuf::Message;
 use protos::daemon as daemon_pb;
 use protos::commontypes as common_pb;
@@ -13,34 +15,34 @@ use super::robot;
 
 #[derive(Clone)]
 pub struct DaemonProxy {
-    inner: Rc<RefCell<Inner>>
+    inner: Arc<Mutex<Inner>>
 }
 
 impl DaemonProxy {
     pub fn new() -> DaemonProxy {
-        DaemonProxy{inner: Rc::new( RefCell::new( Inner::new() ) )}
+        DaemonProxy{inner: Arc::new( Mutex::new( Inner::new() ) )}
     }
 
     pub fn set_write_callback<F>(&mut self, cb: F) 
         where F: FnMut(Vec<u8>),
               F: 'static
     {
-        self.inner.borrow_mut().set_write_callback(cb)
+        self.inner.lock().unwrap().set_write_callback(cb)
     }
 
     pub fn deliver(&mut self, buf: &Vec<u8>) -> Result<(), String> {
-        self.inner.borrow_mut().deliver(buf)
+        self.inner.lock().unwrap().deliver(buf)
     }
 
     pub fn get_version_string<F>(&mut self, cb: F) -> Result<(), String> 
         where F: FnMut(String),
               F: 'static
     {
-        self.inner.borrow_mut().get_version_string(cb)
+        self.inner.lock().unwrap().get_version_string(cb)
     }
 
     pub fn get_robot(&mut self, serial_id: &str) -> robot::Robot {
-        self.inner.borrow_mut().get_robot(serial_id, self.clone())
+        self.inner.lock().unwrap().get_robot(serial_id, self.clone())
     }
 
     pub fn transmit<F>(&mut self, 
@@ -49,7 +51,7 @@ impl DaemonProxy {
         where F: FnMut(daemon_pb::Status),
               F: 'static
     {
-        self.inner.borrow_mut().transmit(payload, cb)
+        self.inner.lock().unwrap().transmit(payload, cb)
     }
 }
 
