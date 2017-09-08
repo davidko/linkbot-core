@@ -10,6 +10,10 @@ use protos::commontypes as common_pb;
 use protos::daemon as daemon_pb;
 use protos::robot as robot_pb;
 
+pub use self::robot_pb::{Goal};
+
+pub type SignalState = self::robot_pb::enableEncoderEvent_In_SignalState;
+
 #[derive(Clone)]
 pub struct Robot {
     inner: Rc<RefCell<Inner>>,
@@ -90,6 +94,159 @@ impl Robot {
         self.inner.borrow_mut().get_led_color(cb)
     }
 
+    pub fn get_motor_controller_omega<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_omega(cb)
+    }
+
+    pub fn get_motor_controller_alpha_i<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_alpha_i(cb)
+    }
+
+    pub fn get_motor_controller_alpha_f<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_alpha_f(cb)
+    }
+
+    pub fn get_motor_controller_proportional_gain<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_proportional_gain(cb)
+    }
+
+    pub fn get_motor_controller_integrator_gain<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_integrator_gain(cb)
+    }
+
+    pub fn get_motor_controller_derivative_gain<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_derivative_gain(cb)
+    }
+
+    pub fn get_motor_controller_safety_threshold<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_safety_threshold(cb)
+    }
+
+    pub fn get_motor_controller_safety_angle<F>(&mut self, cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        self.inner.borrow_mut().get_motor_controller_safety_angle(cb)
+    }
+
+    pub fn set_motor_controller_omega<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_omega(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_alpha_i<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_alpha_i(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_alpha_f<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_alpha_f(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_proportional_gain<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_proportional_gain(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_derivative_gain<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_derivative_gain(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_safety_threshold<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<u32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_safety_threshold(mask, values, cb)
+    }
+
+    pub fn set_motor_controller_safety_angle<F>(&mut self, 
+                                         mask: u32, 
+                                         values: Vec<f32>, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_motor_controller_safety_angle(mask, values, cb)
+    }
+
+    pub fn set_reset_on_disconnect<F>(&mut self, 
+                                         mask: u32, 
+                                         peripheral_mask: u32, 
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_reset_on_disconnect(mask, peripheral_mask, cb)
+    }
+
+    pub fn reset_encoder_revs<F>(&mut self, 
+                                 cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().reset_encoder_revs(cb)
+    }
+
+    pub fn set_buzzer_frequency<F>(&mut self, 
+                                   value: f32, 
+                                   cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().set_buzzer_frequency(value, cb)
+    }
+
     pub fn set_led_color<F>(&mut self, 
                             red: u8, 
                             green: u8, 
@@ -100,6 +257,100 @@ impl Robot {
     {
         self.inner.borrow_mut().set_led_color(red,green,blue,cb)
     }
+
+    pub fn stop<F>(&mut self, 
+                   mask: Option<u32>,
+                   cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().stop(mask, cb)
+    }
+
+    pub fn robot_move<F>(&mut self, 
+                        motor1: Option<Goal>,
+                        motor2: Option<Goal>,
+                        motor3: Option<Goal>,
+                        cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().robot_move(motor1, motor2, motor3, cb)
+    }
+
+    pub fn enable_accelerometer_event<F>(&mut self, 
+                                         enable: bool,
+                                         granularity: Option<f32>,
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().enable_accelerometer_event(enable, granularity, cb)
+    }
+
+    pub fn enable_button_event<F>(&mut self, 
+                                         enable: bool,
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().enable_button_event(enable, cb)
+    }
+
+    pub fn enable_encoder_event<F>(&mut self, 
+                                   encoder1: Option<SignalState>,
+                                   encoder2: Option<SignalState>,
+                                   encoder3: Option<SignalState>,
+                                   cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().enable_encoder_event(encoder1,
+                                                     encoder2,
+                                                     encoder3,
+                                                     cb)
+    }
+
+    pub fn enable_joint_event<F>(&mut self, 
+                                         enable: bool,
+                                         cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().enable_joint_event(enable, cb)
+    }
+
+    pub fn write_twi<F>(&mut self, 
+                        address: u32,
+                        data: Vec<u8>,
+                        cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.borrow_mut().write_twi(address, data, cb)
+    }
+
+    pub fn read_twi<F>(&mut self, 
+                        address: u32,
+                        recvsize: u32,
+                        cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        self.inner.borrow_mut().read_twi(address, recvsize, cb)
+    }
+
+    pub fn write_read_twi<F>(&mut self, 
+                        address: u32,
+                        recvsize: u32,
+                        data: Vec<u8>,
+                        cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        self.inner.borrow_mut().write_read_twi(address, recvsize, data, cb)
+    }
+
 }
 
 struct Inner
@@ -329,6 +580,327 @@ impl Inner {
         })
     }
 
+    fn get_motor_controller_omega<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerOmega( 
+            robot_pb::getMotorControllerOmega_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerOmega() {
+                warn!("Reply has no form factor data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerOmega();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_alpha_i<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerAlphaI( 
+            robot_pb::getMotorControllerAlphaI_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerAlphaI() {
+                warn!("Reply has no getMotorControllerAlphaI data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerAlphaI();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_alpha_f<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerAlphaF( 
+            robot_pb::getMotorControllerAlphaF_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerAlphaF() {
+                warn!("Reply has no getMotorControllerAlphaF data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerAlphaF();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_proportional_gain<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerAlphaF( 
+            robot_pb::getMotorControllerAlphaF_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerAlphaF() {
+                warn!("Reply has no getMotorControllerAlphaF data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerAlphaF();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_integrator_gain<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerIntegratorGain( 
+            robot_pb::getMotorControllerIntegratorGain_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerIntegratorGain() {
+                warn!("Reply has no getMotorControllerIntegratorGain data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerIntegratorGain();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_derivative_gain<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerDerivativeGain( 
+            robot_pb::getMotorControllerDerivativeGain_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerDerivativeGain() {
+                warn!("Reply has no getMotorControllerDerivativeGain data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerDerivativeGain();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_safety_threshold<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerSafetyThreshold( 
+            robot_pb::getMotorControllerSafetyThreshold_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerSafetyThreshold() {
+                warn!("Reply has no getMotorControllerSafetyThreshold data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerSafetyThreshold();
+            cb(data.take_values());
+        })
+    }
+
+    fn get_motor_controller_safety_angle<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<f32>),
+              F: 'static
+    {
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_getMotorControllerSafetyAngle( 
+            robot_pb::getMotorControllerSafetyAngle_In::new()
+            );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_getMotorControllerSafetyAngle() {
+                warn!("Reply has no getMotorControllerSafetyAngle data.");
+                return;
+            }
+            let mut data = reply.take_getMotorControllerSafetyAngle();
+            cb(data.take_values());
+        })
+    }
+
+    fn set_motor_controller_omega<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerOmega_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerOmega( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerOmega() {
+                warn!("Reply has no setMotorControllerOmega data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_alpha_i<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerAlphaI_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerAlphaI( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerAlphaI() {
+                warn!("Reply has no setMotorControllerAlphaI data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_alpha_f<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerAlphaF_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerAlphaF( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerAlphaF() {
+                warn!("Reply has no setMotorControllerAlphaF data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_proportional_gain<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerProportionalGain_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerProportionalGain( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerProportionalGain() {
+                warn!("Reply has no setMotorControllerProportionalGain data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_derivative_gain<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerDerivativeGain_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerDerivativeGain( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerDerivativeGain() {
+                warn!("Reply has no setMotorControllerDerivativeGain data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_safety_threshold<F>(&mut self, mask: u32, values: Vec<u32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerSafetyThreshold_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerSafetyThreshold( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerSafetyThreshold() {
+                warn!("Reply has no setMotorControllerSafetyThreshold data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_motor_controller_safety_angle<F>(&mut self, mask: u32, values: Vec<f32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setMotorControllerSafetyAngle_In::new();
+        message.set_mask(mask);
+        message.set_values(values);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setMotorControllerSafetyAngle( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setMotorControllerSafetyAngle() {
+                warn!("Reply has no setMotorControllerSafetyAngle data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_reset_on_disconnect<F>(&mut self, mask: u32, peripheral_mask: u32, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setResetOnDisconnect_In::new();
+        message.set_mask(mask);
+        message.set_peripheralResetMask(peripheral_mask);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setResetOnDisconnect( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setResetOnDisconnect() {
+                warn!("Reply has no setResetOnDisconnect data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn reset_encoder_revs<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let message = robot_pb::resetEncoderRevs_In::new();
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_resetEncoderRevs( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_resetEncoderRevs() {
+                warn!("Reply has no resetEncoderRevs data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn set_buzzer_frequency<F>(&mut self, value: f32, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::setBuzzerFrequency_In::new();
+        message.set_value(value);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_setBuzzerFrequency( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_setBuzzerFrequency() {
+                warn!("Reply has no setBuzzerFrequency data.");
+                return;
+            }
+            cb();
+        })
+    }
+
     fn set_led_color<F>(&mut self, 
                             red: u8, 
                             green: u8, 
@@ -348,6 +920,210 @@ impl Inner {
         
         self.rpc_request(request, move |_| { cb(); })
     }
+
+    fn stop<F>(&mut self, mask: Option<u32>, mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::stop_In::new();
+        if let Some(mask) = mask {
+            message.set_mask(mask);
+        }
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_stop( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_stop() {
+                warn!("Reply has no stop data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn robot_move<F>(&mut self, 
+                    motor1: Option<Goal>, 
+                    motor2: Option<Goal>,
+                    motor3: Option<Goal>,
+                    mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::robotMove_In::new();
+        if let Some(goal) = motor1 {
+            message.set_motorOneGoal(goal);
+        }
+        if let Some(goal) = motor2 {
+            message.set_motorTwoGoal(goal);
+        }
+        if let Some(goal) = motor3 {
+            message.set_motorThreeGoal(goal);
+        }
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_robotMove( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_robotMove() {
+                warn!("Reply has no robotMove data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn enable_accelerometer_event<F>(&mut self, 
+                                     enable: bool,
+                                     granularity: Option<f32>, 
+                                     mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::enableAccelerometerEvent_In::new();
+        message.set_enable(enable);
+        if let Some(g) = granularity {
+            message.set_granularity(g);
+        }
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_enableAccelerometerEvent( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_enableAccelerometerEvent() {
+                warn!("Reply has no enableAccelerometerEvent data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn enable_button_event<F>(&mut self, 
+                                     enable: bool,
+                                     mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::enableButtonEvent_In::new();
+        message.set_enable(enable);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_enableButtonEvent( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_enableButtonEvent() {
+                warn!("Reply has no enableButtonEvent data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn enable_encoder_event<F>(&mut self, 
+                               encoder1: Option<SignalState>,
+                               encoder2: Option<SignalState>,
+                               encoder3: Option<SignalState>,
+                               mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::enableEncoderEvent_In::new();
+        if let Some(e) = encoder1 {
+            message.set_encoderOne(e);
+        }
+        if let Some(e) = encoder2 {
+            message.set_encoderTwo(e);
+        }
+        if let Some(e) = encoder3 {
+            message.set_encoderThree(e);
+        }
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_enableEncoderEvent( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_enableEncoderEvent() {
+                warn!("Reply has no enableEncoderEvent data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn enable_joint_event<F>(&mut self, 
+                             enable: bool,
+                             mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::enableJointEvent_In::new();
+        message.set_enable(enable);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_enableJointEvent( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_enableJointEvent() {
+                warn!("Reply has no enableJointEvent data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn write_twi<F>(&mut self, 
+                    address: u32,
+                    data: Vec<u8>,
+                    mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::writeTwi_In::new();
+        message.set_address(address);
+        message.set_data(data);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_writeTwi( message );
+        self.rpc_request(request, move |reply| {
+            if ! reply.has_writeTwi() {
+                warn!("Reply has no writeTwi data.");
+                return;
+            }
+            cb();
+        })
+    }
+
+    fn read_twi<F>(&mut self, 
+                    address: u32,
+                    recvsize: u32,
+                    mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        let mut message = robot_pb::readTwi_In::new();
+        message.set_address(address);
+        message.set_recvsize(recvsize);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_readTwi( message );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_readTwi() {
+                warn!("Reply has no readTwi data.");
+                return;
+            }
+            cb(reply.take_readTwi().take_data());
+        })
+    }
+
+    fn write_read_twi<F>(&mut self, 
+                    address: u32,
+                    recvsize: u32,
+                    data: Vec<u8>,
+                    mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        let mut message = robot_pb::writeReadTwi_In::new();
+        message.set_address(address);
+        message.set_recvsize(recvsize);
+        message.set_data(data);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_writeReadTwi( message );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_writeReadTwi() {
+                warn!("Reply has no writeReadTwi data.");
+                return;
+            }
+            cb(reply.take_writeReadTwi().take_data());
+        })
+    }
+
 }
 
 impl fmt::Display for daemon_pb::Status {
