@@ -14,7 +14,13 @@ pub use robot::{Robot,
     EncoderEventHandler,
     ConnectEventHandler,
 };
-pub use protos::robot::{Button, ButtonState};
+pub use protos::robot::{ Button, 
+                         ButtonState, 
+                         FormFactor,
+                         Goal, 
+                         Goal_Type, 
+                         Goal_Controller, 
+                         JointState};
 
 #[cfg(test)]
 mod tests {

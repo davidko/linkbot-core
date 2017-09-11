@@ -9,14 +9,28 @@ use protos::commontypes as common_pb;
 use protos::daemon as daemon_pb;
 use protos::robot as robot_pb;
 
-pub use self::robot_pb::{Goal};
+pub use self::robot_pb::{Goal, Goal_Type, Goal_Controller, JointState};
 
 pub type SignalState = self::robot_pb::enableEncoderEvent_In_SignalState;
 
+/// Callback arguments: (timestamp, x, y, z) where "x,y,z" are in units of "G's"
 pub type AccelerometerEventHandler = FnMut(u32, f32, f32, f32);
+
+/// Callback arguments: (timestamp, button, buttonstate).
+///
+/// The button indexes of 0, 1, and 2 correspond to the power, A, and B buttons on the robot,
+/// respectively. 
+///
+/// The button state is "1" for button down and "0" for button up.
 pub type ButtonEventHandler = FnMut(u32, u32, u32);
+
+/// Callback arguments: (timestamp, mask, values)
 pub type EncoderEventHandler = FnMut(u32, u32, Vec<f32>);
+
 pub type ConnectEventHandler = FnMut(u32);
+
+/// Callback arguments: (timestamp, joint, JointState, angle)
+pub type JointEventHandler = FnMut(u32, u32, JointState, f32);
 
 #[derive(Clone)]
 pub struct Robot {
@@ -321,8 +335,8 @@ impl Robot {
     }
 
     pub fn enable_joint_event<F>(&mut self, 
-                                         enable: bool,
-                                         cb: F) -> Result<(), String>
+                                 enable: bool,
+                                 cb: F) -> Result<(), String>
         where F: FnMut(),
               F: 'static
     {
@@ -341,6 +355,13 @@ impl Robot {
               F: 'static
     {
         self.inner.lock().unwrap().set_connect_event_handler(handler);
+    }
+
+    pub fn set_joint_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, u32, robot_pb::JointState, f32),
+              F: 'static
+    {
+        self.inner.lock().unwrap().set_joint_event_handler(handler);
     }
 
 
@@ -387,6 +408,7 @@ struct Inner
     requests: HashMap<u32, Box<FnMut(robot_pb::RpcReply)>>,
     button_handler: Option<Box<FnMut(u32, robot_pb::Button, robot_pb::ButtonState)>>,
     connect_handler: Option<Box<ConnectEventHandler>>,
+    joint_handler: Option<Box<JointEventHandler>>,
 }
 
 impl Inner {
@@ -397,6 +419,7 @@ impl Inner {
                requests: HashMap::new(),
                button_handler: None,
                connect_handler: None,
+               joint_handler: None,
         }
     }
 
@@ -407,6 +430,8 @@ impl Inner {
             self.handle_button_event(payload.take_buttonEvent())
         } else if payload.has_connectEvent() {
             self.handle_connect_event(payload.take_connectEvent())
+        } else if payload.has_jointEvent() {
+            self.handle_joint_event(payload.take_jointEvent())
         } else {
             warn!("Robot message handler unimplemented!");
             Ok(())
@@ -434,9 +459,19 @@ impl Inner {
     }
 
     fn handle_connect_event(&mut self, event: robot_pb::ConnectEvent) -> Result<(), String> {
-        info!("Robot {} received connect event.", self.serial_id);
         if let Some(ref mut cb) = self.connect_handler {
             cb(event.get_timestamp());
+        }
+        Ok(())
+    }
+
+    fn handle_joint_event(&mut self, event: robot_pb::JointEvent) -> Result<(), String> {
+        if let Some(ref mut cb) = self.joint_handler {
+            cb( event.get_timestamp(),
+                event.get_joint(),
+                event.get_event(),
+                event.get_angle()
+            );
         }
         Ok(())
     }
@@ -1124,6 +1159,13 @@ impl Inner {
               F: 'static
     {
         self.connect_handler = Some( Box::new( handler ) );
+    }
+
+    fn set_joint_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, u32, JointState, f32),
+              F: 'static
+    {
+        self.joint_handler = Some( Box::new( handler ) );
     }
 
     fn write_twi<F>(&mut self, 
