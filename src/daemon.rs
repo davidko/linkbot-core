@@ -46,6 +46,10 @@ impl DaemonProxy {
         self.inner.lock().unwrap().get_robot(serial_id, self.clone())
     }
 
+    pub fn connect_robot(&mut self, serial_id: &str) -> Result<(), String> {
+        self.inner.lock().unwrap().connect_robot(serial_id)
+    }
+
     pub fn transmit<F>(&mut self, 
                        payload: daemon_pb::transmit_In,
                        cb: F) -> Result<(), String>
@@ -114,15 +118,18 @@ impl Inner{
         })
     }
 
+    pub fn connect_robot(&mut self, serial_id: &str) -> Result<(), String>
+    {
+        self.add_robot_refs(vec![ String::from(serial_id), ], 
+                            || { })
+    }
+
     pub fn get_robot(&mut self, serial_id: &str, daemon: DaemonProxy) -> robot::Robot {
         // See if there is a robot in our map first
         if let Some(ref r) = self.robots.get(serial_id) {
             return (*r).clone();
         } 
         
-        // No such robot allocated yet. First, send a "add_robot_refs" message to the daemon server
-        self.add_robot_refs(vec![ String::from(serial_id), ], 
-                            || { }).unwrap();
         // Create a new robot object
         let r = robot::Robot::new_from_daemon(String::from(serial_id), &daemon);
         self.robots.insert(String::from(serial_id), r.clone());

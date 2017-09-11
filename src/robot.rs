@@ -16,6 +16,7 @@ pub type SignalState = self::robot_pb::enableEncoderEvent_In_SignalState;
 pub type AccelerometerEventHandler = FnMut(u32, f32, f32, f32);
 pub type ButtonEventHandler = FnMut(u32, u32, u32);
 pub type EncoderEventHandler = FnMut(u32, u32, Vec<f32>);
+pub type ConnectEventHandler = FnMut(u32);
 
 #[derive(Clone)]
 pub struct Robot {
@@ -335,6 +336,13 @@ impl Robot {
         self.inner.lock().unwrap().set_button_event_handler(handler);
     }
 
+    pub fn set_connect_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32),
+              F: 'static
+    {
+        self.inner.lock().unwrap().set_connect_event_handler(handler);
+    }
+
 
     // Miscellaneous functions
 
@@ -378,6 +386,7 @@ struct Inner
     seq: u32,
     requests: HashMap<u32, Box<FnMut(robot_pb::RpcReply)>>,
     button_handler: Option<Box<FnMut(u32, robot_pb::Button, robot_pb::ButtonState)>>,
+    connect_handler: Option<Box<ConnectEventHandler>>,
 }
 
 impl Inner {
@@ -387,6 +396,7 @@ impl Inner {
                seq: rand::random(),
                requests: HashMap::new(),
                button_handler: None,
+               connect_handler: None,
         }
     }
 
@@ -395,6 +405,8 @@ impl Inner {
             self.handle_rpc_reply(payload.take_rpcReply())
         } else if payload.has_buttonEvent() {
             self.handle_button_event(payload.take_buttonEvent())
+        } else if payload.has_connectEvent() {
+            self.handle_connect_event(payload.take_connectEvent())
         } else {
             warn!("Robot message handler unimplemented!");
             Ok(())
@@ -419,6 +431,14 @@ impl Inner {
         } else {
             Err(format!("Robot received button event but there is no event handler set."))
         }
+    }
+
+    fn handle_connect_event(&mut self, event: robot_pb::ConnectEvent) -> Result<(), String> {
+        info!("Robot {} received connect event.", self.serial_id);
+        if let Some(ref mut cb) = self.connect_handler {
+            cb(event.get_timestamp());
+        }
+        Ok(())
     }
 
     fn rpc_request<F>(&mut self,
@@ -1097,6 +1117,13 @@ impl Inner {
               F: 'static
     {
         self.button_handler = Some( Box::new( handler ) );
+    }
+
+    fn set_connect_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32),
+              F: 'static
+    {
+        self.connect_handler = Some( Box::new( handler ) );
     }
 
     fn write_twi<F>(&mut self, 
