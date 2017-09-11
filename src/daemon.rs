@@ -1,8 +1,6 @@
 
 use rand;
 use std::collections::HashMap;
-use std::rc::Rc;
-use std::cell::RefCell;
 
 use std::sync::{Arc, Mutex};
 
@@ -17,6 +15,9 @@ use super::robot;
 pub struct DaemonProxy {
     inner: Arc<Mutex<Inner>>
 }
+
+unsafe impl Send for DaemonProxy {}
+unsafe impl Sync for DaemonProxy {}
 
 impl DaemonProxy {
     pub fn new() -> DaemonProxy {
@@ -221,11 +222,11 @@ impl Inner{
         }
     }
 
-    fn handle_dongle_event(&mut self, event: daemon_pb::DongleEvent) -> Result<(), String> {
+    fn handle_dongle_event(&mut self, _: daemon_pb::DongleEvent) -> Result<(), String> {
         unimplemented!();
     }
 
-    fn handle_robot_event(&mut self, event: daemon_pb::RobotEvent) -> Result<(), String> {
+    fn handle_robot_event(&mut self, _: daemon_pb::RobotEvent) -> Result<(), String> {
         info!("Received unhandled robot event.");
         Ok(())
     }

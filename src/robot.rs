@@ -1,9 +1,8 @@
 
 use rand;
-use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fmt;
-use std::rc::Rc;
+use std::sync::{Arc, Mutex};
 use super::daemon;
 
 use protos::commontypes as common_pb;
@@ -14,140 +13,147 @@ pub use self::robot_pb::{Goal};
 
 pub type SignalState = self::robot_pb::enableEncoderEvent_In_SignalState;
 
+pub type AccelerometerEventHandler = FnMut(u32, f32, f32, f32);
+pub type ButtonEventHandler = FnMut(u32, u32, u32);
+pub type EncoderEventHandler = FnMut(u32, u32, Vec<f32>);
+
 #[derive(Clone)]
 pub struct Robot {
-    inner: Rc<RefCell<Inner>>,
+    inner: Arc<Mutex<Inner>>,
 }
+
+unsafe impl Send for Robot {}
+unsafe impl Sync for Robot {}
 
 impl Robot {
     pub fn new_from_daemon(serial_id: String, d: &daemon::DaemonProxy) -> Robot {
-        Robot{ inner: Rc::new( RefCell::new( 
+        Robot{ inner: Arc::new( Mutex::new( 
                     Inner::new_from_daemon(serial_id, d)
                     )),
         }
     }
 
     pub fn deliver(&mut self, payload: robot_pb::RobotToClient) -> Result<(), String> {
-        self.inner.borrow_mut().deliver(payload)
+        self.inner.lock().unwrap().deliver(payload)
     }
 
     pub fn get_accelerometer_data<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(f32, f32, f32),
               F: 'static
     {
-        self.inner.borrow_mut().get_accelerometer_data(cb)
+        self.inner.lock().unwrap().get_accelerometer_data(cb)
     }
 
     pub fn get_battery_voltage<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(f32),
               F: 'static
     {
-        self.inner.borrow_mut().get_battery_voltage(cb)
+        self.inner.lock().unwrap().get_battery_voltage(cb)
     }
 
     pub fn get_button_state<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(u32),
               F: 'static
     {
-        self.inner.borrow_mut().get_button_state(cb)
+        self.inner.lock().unwrap().get_button_state(cb)
     }
 
     pub fn get_buzzer_frequency<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(f32),
               F: 'static
     {
-        self.inner.borrow_mut().get_buzzer_frequency(cb)
+        self.inner.lock().unwrap().get_buzzer_frequency(cb)
     }
 
     pub fn get_encoder_values<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(u32, Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_encoder_values(cb)
+        self.inner.lock().unwrap().get_encoder_values(cb)
     }
 
     pub fn get_firmware_version_string<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(String),
               F: 'static
     {
-        self.inner.borrow_mut().get_firmware_version_string(cb)
+        self.inner.lock().unwrap().get_firmware_version_string(cb)
     }
 
     pub fn get_form_factor<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(robot_pb::FormFactor),
               F: 'static
     {
-        self.inner.borrow_mut().get_form_factor(cb)
+        self.inner.lock().unwrap().get_form_factor(cb)
     }
 
     pub fn get_joint_states<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(u32, Vec<robot_pb::JointState>),
               F: 'static
     {
-        self.inner.borrow_mut().get_joint_states(cb)
+        self.inner.lock().unwrap().get_joint_states(cb)
     }
 
     pub fn get_led_color<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(u8, u8, u8),
               F: 'static
     {
-        self.inner.borrow_mut().get_led_color(cb)
+        self.inner.lock().unwrap().get_led_color(cb)
     }
 
     pub fn get_motor_controller_omega<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_omega(cb)
+        self.inner.lock().unwrap().get_motor_controller_omega(cb)
     }
 
     pub fn get_motor_controller_alpha_i<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_alpha_i(cb)
+        self.inner.lock().unwrap().get_motor_controller_alpha_i(cb)
     }
 
     pub fn get_motor_controller_alpha_f<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_alpha_f(cb)
+        self.inner.lock().unwrap().get_motor_controller_alpha_f(cb)
     }
 
     pub fn get_motor_controller_proportional_gain<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_proportional_gain(cb)
+        self.inner.lock().unwrap().get_motor_controller_proportional_gain(cb)
     }
 
     pub fn get_motor_controller_integrator_gain<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_integrator_gain(cb)
+        self.inner.lock().unwrap().get_motor_controller_integrator_gain(cb)
     }
 
     pub fn get_motor_controller_derivative_gain<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_derivative_gain(cb)
+        self.inner.lock().unwrap().get_motor_controller_derivative_gain(cb)
     }
 
     pub fn get_motor_controller_safety_threshold<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<u32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_safety_threshold(cb)
+        self.inner.lock().unwrap().get_motor_controller_safety_threshold(cb)
     }
 
     pub fn get_motor_controller_safety_angle<F>(&mut self, cb: F) -> Result<(), String>
         where F: FnMut(Vec<f32>),
               F: 'static
     {
-        self.inner.borrow_mut().get_motor_controller_safety_angle(cb)
+        self.inner.lock().unwrap().get_motor_controller_safety_angle(cb)
     }
 
     pub fn set_motor_controller_omega<F>(&mut self, 
@@ -157,7 +163,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_omega(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_omega(mask, values, cb)
     }
 
     pub fn set_motor_controller_alpha_i<F>(&mut self, 
@@ -167,7 +173,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_alpha_i(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_alpha_i(mask, values, cb)
     }
 
     pub fn set_motor_controller_alpha_f<F>(&mut self, 
@@ -177,7 +183,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_alpha_f(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_alpha_f(mask, values, cb)
     }
 
     pub fn set_motor_controller_proportional_gain<F>(&mut self, 
@@ -187,7 +193,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_proportional_gain(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_proportional_gain(mask, values, cb)
     }
 
     pub fn set_motor_controller_derivative_gain<F>(&mut self, 
@@ -197,7 +203,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_derivative_gain(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_derivative_gain(mask, values, cb)
     }
 
     pub fn set_motor_controller_safety_threshold<F>(&mut self, 
@@ -207,7 +213,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_safety_threshold(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_safety_threshold(mask, values, cb)
     }
 
     pub fn set_motor_controller_safety_angle<F>(&mut self, 
@@ -217,7 +223,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_motor_controller_safety_angle(mask, values, cb)
+        self.inner.lock().unwrap().set_motor_controller_safety_angle(mask, values, cb)
     }
 
     pub fn set_reset_on_disconnect<F>(&mut self, 
@@ -227,7 +233,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_reset_on_disconnect(mask, peripheral_mask, cb)
+        self.inner.lock().unwrap().set_reset_on_disconnect(mask, peripheral_mask, cb)
     }
 
     pub fn reset_encoder_revs<F>(&mut self, 
@@ -235,7 +241,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().reset_encoder_revs(cb)
+        self.inner.lock().unwrap().reset_encoder_revs(cb)
     }
 
     pub fn set_buzzer_frequency<F>(&mut self, 
@@ -244,7 +250,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_buzzer_frequency(value, cb)
+        self.inner.lock().unwrap().set_buzzer_frequency(value, cb)
     }
 
     pub fn set_led_color<F>(&mut self, 
@@ -255,7 +261,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().set_led_color(red,green,blue,cb)
+        self.inner.lock().unwrap().set_led_color(red,green,blue,cb)
     }
 
     pub fn stop<F>(&mut self, 
@@ -264,7 +270,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().stop(mask, cb)
+        self.inner.lock().unwrap().stop(mask, cb)
     }
 
     pub fn robot_move<F>(&mut self, 
@@ -275,8 +281,10 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().robot_move(motor1, motor2, motor3, cb)
+        self.inner.lock().unwrap().robot_move(motor1, motor2, motor3, cb)
     }
+
+    // Robot Events
 
     pub fn enable_accelerometer_event<F>(&mut self, 
                                          enable: bool,
@@ -285,16 +293,16 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().enable_accelerometer_event(enable, granularity, cb)
+        self.inner.lock().unwrap().enable_accelerometer_event(enable, granularity, cb)
     }
 
     pub fn enable_button_event<F>(&mut self, 
-                                         enable: bool,
-                                         cb: F) -> Result<(), String>
+                                  enable: bool,
+                                  cb: F) -> Result<(), String>
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().enable_button_event(enable, cb)
+        self.inner.lock().unwrap().enable_button_event(enable, cb)
     }
 
     pub fn enable_encoder_event<F>(&mut self, 
@@ -305,7 +313,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().enable_encoder_event(encoder1,
+        self.inner.lock().unwrap().enable_encoder_event(encoder1,
                                                      encoder2,
                                                      encoder3,
                                                      cb)
@@ -317,8 +325,18 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().enable_joint_event(enable, cb)
+        self.inner.lock().unwrap().enable_joint_event(enable, cb)
     }
+
+    pub fn set_button_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, robot_pb::Button, robot_pb::ButtonState),
+              F: 'static
+    {
+        self.inner.lock().unwrap().set_button_event_handler(handler);
+    }
+
+
+    // Miscellaneous functions
 
     pub fn write_twi<F>(&mut self, 
                         address: u32,
@@ -327,7 +345,7 @@ impl Robot {
         where F: FnMut(),
               F: 'static
     {
-        self.inner.borrow_mut().write_twi(address, data, cb)
+        self.inner.lock().unwrap().write_twi(address, data, cb)
     }
 
     pub fn read_twi<F>(&mut self, 
@@ -337,7 +355,7 @@ impl Robot {
         where F: FnMut(Vec<u8>),
               F: 'static
     {
-        self.inner.borrow_mut().read_twi(address, recvsize, cb)
+        self.inner.lock().unwrap().read_twi(address, recvsize, cb)
     }
 
     pub fn write_read_twi<F>(&mut self, 
@@ -348,7 +366,7 @@ impl Robot {
         where F: FnMut(Vec<u8>),
               F: 'static
     {
-        self.inner.borrow_mut().write_read_twi(address, recvsize, data, cb)
+        self.inner.lock().unwrap().write_read_twi(address, recvsize, data, cb)
     }
 
 }
@@ -359,6 +377,7 @@ struct Inner
     daemon: daemon::DaemonProxy,
     seq: u32,
     requests: HashMap<u32, Box<FnMut(robot_pb::RpcReply)>>,
+    button_handler: Option<Box<FnMut(u32, robot_pb::Button, robot_pb::ButtonState)>>,
 }
 
 impl Inner {
@@ -367,14 +386,18 @@ impl Inner {
                daemon: d.clone(),
                seq: rand::random(),
                requests: HashMap::new(),
+               button_handler: None,
         }
     }
 
     fn deliver(&mut self, mut payload: robot_pb::RobotToClient) -> Result<(), String> {
         if payload.has_rpcReply() {
             self.handle_rpc_reply(payload.take_rpcReply())
+        } else if payload.has_buttonEvent() {
+            self.handle_button_event(payload.take_buttonEvent())
         } else {
-            unimplemented!()
+            warn!("Robot message handler unimplemented!");
+            Ok(())
         }
     }
 
@@ -386,6 +409,15 @@ impl Inner {
             Ok(())
         } else {
             Err(format!("Robot {} received unsolicited reply with request ID: {}.", self.serial_id, request_id))
+        }
+    }
+
+    fn handle_button_event(&mut self, event: robot_pb::ButtonEvent) -> Result<(), String> {
+        if let Some(ref mut cb) = self.button_handler {
+            cb(event.get_timestamp(), event.get_button(), event.get_state());
+            Ok(())
+        } else {
+            Err(format!("Robot received button event but there is no event handler set."))
         }
     }
 
@@ -1057,6 +1089,14 @@ impl Inner {
             }
             cb();
         })
+    }
+
+
+    fn set_button_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, robot_pb::Button, robot_pb::ButtonState),
+              F: 'static
+    {
+        self.button_handler = Some( Box::new( handler ) );
     }
 
     fn write_twi<F>(&mut self, 

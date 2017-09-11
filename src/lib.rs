@@ -8,7 +8,8 @@ mod daemon;
 mod robot;
 
 pub use daemon::{DaemonProxy};
-pub use robot::{Robot};
+pub use robot::{Robot, AccelerometerEventHandler, ButtonEventHandler, EncoderEventHandler};
+pub use protos::robot::{Button, ButtonState};
 
 #[cfg(test)]
 mod tests {
