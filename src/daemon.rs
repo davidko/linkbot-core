@@ -197,7 +197,6 @@ impl Inner{
         // See if we have a matching request waiting
         let request_id = reply.get_requestId();
         if let Some(mut cb) = self.requests.remove(&request_id) {
-            println!("Daemon proxy hadling RPC reply...");
             cb(reply);
             Ok(())
         } else {
@@ -218,7 +217,6 @@ impl Inner{
                 let payload = receive.take_payload();
                 let serial_id = receive.take_serialId().take_value();
                 if let Some(ref mut robot) = self.robots.get_mut(&serial_id) {
-                    println!("Daemon proxy delivering payload to robot object...");
                     robot.deliver(payload)
                 } else {
                     Err(String::from(
