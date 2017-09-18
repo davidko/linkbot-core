@@ -13,6 +13,7 @@ pub use robot::{Robot,
     ButtonEventHandler, 
     EncoderEventHandler,
     ConnectEventHandler,
+    SignalState,
 };
 pub use protos::robot::{ Button, 
                          ButtonState, 
