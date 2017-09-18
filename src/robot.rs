@@ -441,6 +441,8 @@ impl Inner {
             self.handle_connect_event(payload.take_connectEvent())
         } else if payload.has_jointEvent() {
             self.handle_joint_event(payload.take_jointEvent())
+        } else if payload.has_encoderEvent() {
+            self.handle_encoder_event(payload.take_encoderEvent())
         } else {
             warn!("Robot message handler unimplemented!");
             Ok(())
@@ -480,6 +482,16 @@ impl Inner {
                 event.get_joint(),
                 event.get_event(),
                 event.get_angle()
+            );
+        }
+        Ok(())
+    }
+
+    fn handle_encoder_event(&mut self, mut event: robot_pb::EncoderEvent) -> Result<(), String> {
+        if let Some(ref mut cb) = self.encoder_handler {
+            cb( event.get_timestamp(),
+                event.get_mask(),
+                event.take_values()
             );
         }
         Ok(())
