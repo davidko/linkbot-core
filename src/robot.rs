@@ -357,6 +357,13 @@ impl Robot {
         self.inner.lock().unwrap().set_connect_event_handler(handler);
     }
 
+    pub fn set_encoder_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, u32, Vec<f32>), // (timestamp, mask, values)
+              F: 'static
+    {
+        self.inner.lock().unwrap().set_encoder_event_handler(handler);
+    }
+
     pub fn set_joint_event_handler<F>(&mut self, handler: F)
         where F: FnMut(u32, u32, robot_pb::JointState, f32),
               F: 'static
@@ -409,6 +416,7 @@ struct Inner
     button_handler: Option<Box<FnMut(u32, robot_pb::Button, robot_pb::ButtonState)>>,
     connect_handler: Option<Box<ConnectEventHandler>>,
     joint_handler: Option<Box<JointEventHandler>>,
+    encoder_handler: Option<Box<EncoderEventHandler>>,
 }
 
 impl Inner {
@@ -420,6 +428,7 @@ impl Inner {
                button_handler: None,
                connect_handler: None,
                joint_handler: None,
+               encoder_handler: None,
         }
     }
 
@@ -1152,6 +1161,13 @@ impl Inner {
               F: 'static
     {
         self.button_handler = Some( Box::new( handler ) );
+    }
+
+    fn set_encoder_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, u32, Vec<f32>), // (timestamp, mask, values)
+              F: 'static
+    {
+        self.encoder_handler = Some( Box::new( handler ) );
     }
 
     fn set_connect_event_handler<F>(&mut self, handler: F)
