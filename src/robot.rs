@@ -343,6 +343,13 @@ impl Robot {
         self.inner.lock().unwrap().enable_joint_event(enable, cb)
     }
 
+    pub fn set_accelerometer_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, f32, f32, f32),
+              F: 'static
+    {
+        self.inner.lock().unwrap().set_accelerometer_event_handler(handler);
+    }
+
     pub fn set_button_event_handler<F>(&mut self, handler: F)
         where F: FnMut(u32, robot_pb::Button, robot_pb::ButtonState),
               F: 'static
@@ -417,6 +424,7 @@ struct Inner
     connect_handler: Option<Box<ConnectEventHandler>>,
     joint_handler: Option<Box<JointEventHandler>>,
     encoder_handler: Option<Box<EncoderEventHandler>>,
+    accelerometer_handler: Option<Box<AccelerometerEventHandler>>,
 }
 
 impl Inner {
@@ -429,6 +437,7 @@ impl Inner {
                connect_handler: None,
                joint_handler: None,
                encoder_handler: None,
+               accelerometer_handler: None,
         }
     }
 
@@ -1167,6 +1176,12 @@ impl Inner {
         })
     }
 
+    fn set_accelerometer_event_handler<F>(&mut self, handler: F)
+        where F: FnMut(u32, f32, f32, f32),
+              F: 'static
+    {
+        self.accelerometer_handler = Some( Box::new( handler ) );
+    }
 
     fn set_button_event_handler<F>(&mut self, handler: F)
         where F: FnMut(u32, robot_pb::Button, robot_pb::ButtonState),
