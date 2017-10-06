@@ -231,8 +231,18 @@ impl Inner{
         unimplemented!();
     }
 
-    fn handle_robot_event(&mut self, _: daemon_pb::RobotEvent) -> Result<(), String> {
-        info!("Received unhandled robot event.");
-        Ok(())
+    fn handle_robot_event(&mut self, mut event: daemon_pb::RobotEvent) -> Result<(), String> {
+        println!("Recevied robot event.");
+        if ! event.has_serialId() {
+            warn!("Received robot event with no serial id. Ignoring...");
+            Ok(())
+        } else {
+            // See if we have the robot in our list of robots
+            let serial_id = event.take_serialId().take_value();
+            if let Some(ref mut robot) = self.robots.get_mut(&serial_id) {
+                robot.call_connect_handler();
+            }
+            Ok(())
+        }
     }
 }

@@ -412,6 +412,12 @@ impl Robot {
         self.inner.lock().unwrap().write_read_twi(address, recvsize, data, cb)
     }
 
+    /// This is a utility function used internally to trigger a robot's connect callback.
+    pub fn call_connect_handler(&mut self)
+    {
+        self.inner.lock().unwrap().call_connect_handler();
+    }
+
 }
 
 struct Inner
@@ -479,6 +485,7 @@ impl Inner {
     }
 
     fn handle_connect_event(&mut self, event: robot_pb::ConnectEvent) -> Result<(), String> {
+        println!("Robot received connect event.");
         if let Some(ref mut cb) = self.connect_handler {
             cb(event.get_timestamp());
         }
@@ -1274,6 +1281,13 @@ impl Inner {
             }
             cb(reply.take_writeReadTwi().take_data());
         })
+    }
+
+    fn call_connect_handler(&mut self)
+    {
+        if let Some(ref mut cb) = self.connect_handler {
+            cb(0);
+        }
     }
 
 }
