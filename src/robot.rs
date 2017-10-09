@@ -458,6 +458,8 @@ impl Inner {
             self.handle_joint_event(payload.take_jointEvent())
         } else if payload.has_encoderEvent() {
             self.handle_encoder_event(payload.take_encoderEvent())
+        } else if payload.has_accelerometerEvent() {
+            self.handle_accelerometer_event(payload.take_accelerometerEvent())
         } else {
             warn!("Robot message handler unimplemented!");
             Ok(())
@@ -508,6 +510,17 @@ impl Inner {
             cb( event.get_timestamp(),
                 event.get_mask(),
                 event.take_values()
+            );
+        }
+        Ok(())
+    }
+
+    fn handle_accelerometer_event(&mut self, mut event: robot_pb::AccelerometerEvent) -> Result<(), String> {
+        if let Some(ref mut cb) = self.accelerometer_handler {
+            cb( event.get_timestamp(),
+                event.get_x(),
+                event.get_y(),
+                event.get_z()
             );
         }
         Ok(())
