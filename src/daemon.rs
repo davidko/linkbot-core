@@ -7,6 +7,7 @@ use std::sync::{Arc, Mutex};
 use protobuf::Message;
 use protos::daemon as daemon_pb;
 use protos::commontypes as common_pb;
+use protos::robot as robot_pb;
 use super::robot;
 
 //static DAEMON_CLIENT: Option<DaemonProxy> = None;
@@ -24,6 +25,8 @@ impl DaemonProxy {
         DaemonProxy{inner: Arc::new( Mutex::new( Inner::new() ) )}
     }
 
+    /// The "write callback" is the function the daemon proxy will use to try and send data back to
+    /// the Daemon Server. 
     pub fn set_write_callback<F>(&mut self, cb: F) 
         where F: FnMut(Vec<u8>),
               F: 'static
@@ -31,10 +34,12 @@ impl DaemonProxy {
         self.inner.lock().unwrap().set_write_callback(cb)
     }
 
+    /// Deliver bytes received from the Daemon Server to this function.
     pub fn deliver(&mut self, buf: &Vec<u8>) -> Result<(), String> {
         self.inner.lock().unwrap().deliver(buf)
     }
 
+    /// Get the version string from the Daemon Server
     pub fn get_version_string<F>(&mut self, cb: F) -> Result<(), String> 
         where F: FnMut(String),
               F: 'static
@@ -42,14 +47,27 @@ impl DaemonProxy {
         self.inner.lock().unwrap().get_version_string(cb)
     }
 
+    /// Get a proxy to a robot. The daemon proxy will ask the server to create a robot reference
+    /// for this robot, but the daemon server will not issue any "connect" commands to the robot.
+    /// Use the connect_robot() function to do that.
     pub fn get_robot(&mut self, serial_id: &str) -> robot::Robot {
         self.inner.lock().unwrap().get_robot(serial_id, self.clone())
     }
 
+    /// Instruct the daemon server to send a ConnectSession message to a robot.
     pub fn connect_robot(&mut self, serial_id: &str) -> Result<(), String> {
         self.inner.lock().unwrap().connect_robot(serial_id)
     }
 
+    /// Stop all robots connected to the daemon.
+    pub fn stop_all_robots<F>(&mut self, cb: F) -> Result<(), String> 
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.lock().unwrap().stop_all_robots(cb)
+    }
+
+    /// Instruct the daemon server to transmit a message
     pub fn transmit<F>(&mut self, 
                        payload: daemon_pb::transmit_In,
                        cb: F) -> Result<(), String>
@@ -124,6 +142,24 @@ impl Inner{
                             || { })
     }
 
+    pub fn stop_all_robots<F>(&mut self, mut cb: F) -> Result<(), String> 
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut reset_peripherals = robot_pb::ResetPeripherals::new();
+        reset_peripherals.set_peripheralResetMask(0xffff);
+        let mut payload = robot_pb::ClientToRobotBroadcast::new();
+        payload.set_resetPeripherals(reset_peripherals);
+        let mut broadcast = daemon_pb::transmitBroadcast_In::new();
+        broadcast.set_broadcastMethod(daemon_pb::BroadcastMethod::MULTICAST_LOCAL);
+        broadcast.set_payload(payload);
+        let mut rpc_request = daemon_pb::RpcRequest::new();
+        rpc_request.set_transmitBroadcast(broadcast);
+        self.rpc_request(rpc_request, move |_| {
+            cb();
+        })
+    }
+
     pub fn get_robot(&mut self, serial_id: &str, daemon: DaemonProxy) -> robot::Robot {
         // See if there is a robot in our map first
         if let Some(ref r) = self.robots.get(serial_id) {
@@ -159,6 +195,7 @@ impl Inner{
     {
         // Build a ClientToDaemon message
         request.set_requestId(self.seq);
+        println!("Daemon sending RPC request with ID: {}", self.seq);
         let mut msg = daemon_pb::ClientToDaemon::new();
         msg.set_rpcRequest(request);
         // Encode it and send it to the write callback
@@ -200,7 +237,7 @@ impl Inner{
             cb(reply);
             Ok(())
         } else {
-            Err(String::from("Received unsolicited RpcReply."))
+            Err(format!("Received unsolicited RpcReply with ID {}.", request_id))
         }
     }
 

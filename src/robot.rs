@@ -515,7 +515,7 @@ impl Inner {
         Ok(())
     }
 
-    fn handle_accelerometer_event(&mut self, mut event: robot_pb::AccelerometerEvent) -> Result<(), String> {
+    fn handle_accelerometer_event(&mut self, event: robot_pb::AccelerometerEvent) -> Result<(), String> {
         if let Some(ref mut cb) = self.accelerometer_handler {
             cb( event.get_timestamp(),
                 event.get_x(),
