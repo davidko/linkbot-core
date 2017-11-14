@@ -195,7 +195,6 @@ impl Inner{
     {
         // Build a ClientToDaemon message
         request.set_requestId(self.seq);
-        println!("Daemon sending RPC request with ID: {}", self.seq);
         let mut msg = daemon_pb::ClientToDaemon::new();
         msg.set_rpcRequest(request);
         // Encode it and send it to the write callback
@@ -269,7 +268,6 @@ impl Inner{
     }
 
     fn handle_robot_event(&mut self, mut event: daemon_pb::RobotEvent) -> Result<(), String> {
-        println!("Recevied robot event.");
         if ! event.has_serialId() {
             warn!("Received robot event with no serial id. Ignoring...");
             Ok(())

@@ -487,7 +487,6 @@ impl Inner {
     }
 
     fn handle_connect_event(&mut self, event: robot_pb::ConnectEvent) -> Result<(), String> {
-        println!("Robot received connect event.");
         if let Some(ref mut cb) = self.connect_handler {
             cb(event.get_timestamp());
         }
