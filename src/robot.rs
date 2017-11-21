@@ -412,6 +412,26 @@ impl Robot {
         self.inner.lock().unwrap().write_read_twi(address, recvsize, data, cb)
     }
 
+    pub fn write_eeprom<F>(&mut self,
+                           address: u32,
+                           data: Vec<u8>,
+                           cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        self.inner.lock().unwrap().write_eeprom(address, data, cb)
+    }
+
+    pub fn read_eeprom<F>(&mut self,
+                          address: u32,
+                          size: u32,
+                          cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        self.inner.lock().unwrap().read_eeprom(address, size, cb)
+    }
+
     /// This is a utility function used internally to trigger a robot's connect callback.
     pub fn call_connect_handler(&mut self)
     {
@@ -1292,6 +1312,44 @@ impl Inner {
                 return;
             }
             cb(reply.take_writeReadTwi().take_data());
+        })
+    }
+
+    fn write_eeprom<F>(&mut self,
+                       address: u32,
+                       data: Vec<u8>,
+                       mut cb: F) -> Result<(), String>
+        where F: FnMut(),
+              F: 'static
+    {
+        let mut message = robot_pb::writeEeprom_In::new();
+        message.set_address(address);
+        message.set_data(data);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_writeEeprom( message );
+        self.rpc_request(request, move |_| {
+            cb();
+        })
+    }
+
+    fn read_eeprom<F>(&mut self,
+                      address: u32,
+                      size: u32,
+                      mut cb: F) -> Result<(), String>
+        where F: FnMut(Vec<u8>),
+              F: 'static
+    {
+        let mut message = robot_pb::readEeprom_In::new();
+        message.set_address(address);
+        message.set_size(size);
+        let mut request = robot_pb::RpcRequest::new();
+        request.set_readEeprom( message );
+        self.rpc_request(request, move |mut reply| {
+            if ! reply.has_readEeprom() {
+                warn!("Reply has no writeReadTwi data.");
+                return;
+            }
+            cb(reply.take_readEeprom().take_data());
         })
     }
 
