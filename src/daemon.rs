@@ -22,6 +22,20 @@ unsafe impl Sync for DaemonProxy {}
 
 impl DaemonProxy {
     pub fn new() -> DaemonProxy {
+        // Instantiate a ghostly daemon_pb::DaemonToClient() to avoid lazy initialization later.
+        println!("Begin pre-init of DaemonToClient...");
+        daemon_pb::DaemonToClient::new();
+        {
+            let mut req = robot_pb::RpcRequest::new();
+            let bytes = req.write_to_bytes().unwrap();
+            req.merge_from_bytes(&bytes.as_slice()).unwrap();
+        }
+        {
+            let mut reply = robot_pb::RpcReply::new();
+            let bytes = reply.write_to_bytes().unwrap();
+            reply.merge_from_bytes(&bytes.as_slice()).unwrap();
+        }
+        println!("Begin pre-init of DaemonToClient...done");
         DaemonProxy{inner: Arc::new( Mutex::new( Inner::new() ) )}
     }
 
