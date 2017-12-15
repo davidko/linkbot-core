@@ -320,17 +320,37 @@ impl Robot {
         self.inner.lock().unwrap().enable_button_event(enable, cb)
     }
 
+    /// Enable encoder events
+    ///
+    /// Each argument is a granularity in degrees. If any motor moves by more than the amount
+    /// specified by the granularity, an encoder event is emitted.
     pub fn enable_encoder_event<F>(&mut self, 
-                                   encoder1: Option<SignalState>,
-                                   encoder2: Option<SignalState>,
-                                   encoder3: Option<SignalState>,
+                                   encoder1: Option<f32>,
+                                   encoder2: Option<f32>,
+                                   encoder3: Option<f32>,
                                    cb: F) -> Result<(), String>
         where F: FnMut(),
               F: 'static
     {
-        self.inner.lock().unwrap().enable_encoder_event(encoder1,
-                                                     encoder2,
-                                                     encoder3,
+        let f = |x| {
+            match x {
+                Some(granularity) => {
+                    let mut signal_state = SignalState::new();
+                    signal_state.set_enable(true);
+                    signal_state.set_granularity(granularity*3.14159/180.0);
+                    Some(signal_state)
+                }
+                None => {
+                    let mut signal_state = SignalState::new();
+                    signal_state.set_enable(false);
+                    signal_state.set_granularity(5.0*3.14159/180.0);
+                    Some(signal_state)
+                }
+            }
+        };
+        self.inner.lock().unwrap().enable_encoder_event(f(encoder1),
+                                                     f(encoder2),
+                                                     f(encoder3),
                                                      cb)
     }
 
@@ -364,6 +384,9 @@ impl Robot {
         self.inner.lock().unwrap().set_connect_event_handler(handler);
     }
 
+    /// Set a callback for encoder events.
+    ///
+    /// Callback arguments are: (timestamp, mask, values)
     pub fn set_encoder_event_handler<F>(&mut self, handler: F)
         where F: FnMut(u32, u32, Vec<f32>), // (timestamp, mask, values)
               F: 'static
