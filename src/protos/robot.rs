@@ -2611,7 +2611,7 @@ impl ::protobuf::Message for getEncoderValues_Out {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -3465,11 +3465,7 @@ impl ::protobuf::Message for getFormFactor_Out {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.value = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.value, 1, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -3929,7 +3925,7 @@ impl ::protobuf::Message for getJointStates_Out {
                     self.timestamp = ::std::option::Option::Some(tmp);
                 },
                 2 => {
-                    ::protobuf::rt::read_repeated_enum_into(wire_type, is, &mut self.values)?;
+                    ::protobuf::rt::read_repeated_enum_with_unknown_fields_into(wire_type, is, &mut self.values, 2, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -4809,7 +4805,7 @@ impl ::protobuf::Message for getMotorControllerOmega_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -5239,7 +5235,7 @@ impl ::protobuf::Message for getMotorControllerAlphaI_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -5669,7 +5665,7 @@ impl ::protobuf::Message for getMotorControllerAlphaF_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -6099,7 +6095,7 @@ impl ::protobuf::Message for getMotorControllerProportionalGain_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -6529,7 +6525,7 @@ impl ::protobuf::Message for getMotorControllerIntegratorGain_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -6959,7 +6955,7 @@ impl ::protobuf::Message for getMotorControllerDerivativeGain_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -7819,7 +7815,7 @@ impl ::protobuf::Message for getMotorControllerSafetyAngle_Out {
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -8162,7 +8158,7 @@ impl ::protobuf::Message for setMotorControllerOmega_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -8639,7 +8635,7 @@ impl ::protobuf::Message for setMotorControllerAlphaI_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -9116,7 +9112,7 @@ impl ::protobuf::Message for setMotorControllerAlphaF_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -9593,7 +9589,7 @@ impl ::protobuf::Message for setMotorControllerProportionalGain_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -10070,7 +10066,7 @@ impl ::protobuf::Message for setMotorControllerIntegratorGain_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -10547,7 +10543,7 @@ impl ::protobuf::Message for setMotorControllerDerivativeGain_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -11501,7 +11497,7 @@ impl ::protobuf::Message for setMotorControllerSafetyAngle_In {
             my_size += ::protobuf::rt::value_size(1, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -14020,11 +14016,7 @@ impl ::protobuf::Message for Goal {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.field_type = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.field_type, 1, &mut self.unknown_fields)?
                 },
                 2 => {
                     if wire_type != ::protobuf::wire_format::WireTypeFixed32 {
@@ -14034,11 +14026,7 @@ impl ::protobuf::Message for Goal {
                     self.goal = ::std::option::Option::Some(tmp);
                 },
                 3 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.controller = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.controller, 3, &mut self.unknown_fields)?
                 },
                 4 => {
                     if wire_type != ::protobuf::wire_format::WireTypeFixed32 {
@@ -14048,11 +14036,7 @@ impl ::protobuf::Message for Goal {
                     self.timeout = ::std::option::Option::Some(tmp);
                 },
                 5 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.modeOnTimeout = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.modeOnTimeout, 5, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -19990,6 +19974,1539 @@ impl ::protobuf::reflect::ProtobufValue for reboot_Out {
 }
 
 #[derive(PartialEq,Clone,Default)]
+pub struct getBCRemotes {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCRemotes {}
+
+impl getBCRemotes {
+    pub fn new() -> getBCRemotes {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCRemotes {
+        static mut instance: ::protobuf::lazy::Lazy<getBCRemotes> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCRemotes,
+        };
+        unsafe {
+            instance.get(getBCRemotes::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCRemotes {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCRemotes {
+    fn new() -> getBCRemotes {
+        getBCRemotes::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCRemotes>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCRemotes>(
+                    "getBCRemotes",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCRemotes {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCRemotes {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCRemotes {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCRemotes_In {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCRemotes_In {}
+
+impl getBCRemotes_In {
+    pub fn new() -> getBCRemotes_In {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCRemotes_In {
+        static mut instance: ::protobuf::lazy::Lazy<getBCRemotes_In> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCRemotes_In,
+        };
+        unsafe {
+            instance.get(getBCRemotes_In::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCRemotes_In {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCRemotes_In {
+    fn new() -> getBCRemotes_In {
+        getBCRemotes_In::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCRemotes_In>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCRemotes_In>(
+                    "getBCRemotes_In",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCRemotes_In {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCRemotes_In {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCRemotes_In {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCRemotes_Out {
+    // message fields
+    serialId: ::protobuf::RepeatedField<super::commontypes::SerialId>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCRemotes_Out {}
+
+impl getBCRemotes_Out {
+    pub fn new() -> getBCRemotes_Out {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCRemotes_Out {
+        static mut instance: ::protobuf::lazy::Lazy<getBCRemotes_Out> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCRemotes_Out,
+        };
+        unsafe {
+            instance.get(getBCRemotes_Out::new)
+        }
+    }
+
+    // repeated .linkbot.SerialId serialId = 1;
+
+    pub fn clear_serialId(&mut self) {
+        self.serialId.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_serialId(&mut self, v: ::protobuf::RepeatedField<super::commontypes::SerialId>) {
+        self.serialId = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_serialId(&mut self) -> &mut ::protobuf::RepeatedField<super::commontypes::SerialId> {
+        &mut self.serialId
+    }
+
+    // Take field
+    pub fn take_serialId(&mut self) -> ::protobuf::RepeatedField<super::commontypes::SerialId> {
+        ::std::mem::replace(&mut self.serialId, ::protobuf::RepeatedField::new())
+    }
+
+    pub fn get_serialId(&self) -> &[super::commontypes::SerialId] {
+        &self.serialId
+    }
+
+    fn get_serialId_for_reflect(&self) -> &::protobuf::RepeatedField<super::commontypes::SerialId> {
+        &self.serialId
+    }
+
+    fn mut_serialId_for_reflect(&mut self) -> &mut ::protobuf::RepeatedField<super::commontypes::SerialId> {
+        &mut self.serialId
+    }
+}
+
+impl ::protobuf::Message for getBCRemotes_Out {
+    fn is_initialized(&self) -> bool {
+        for v in &self.serialId {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.serialId)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        for value in &self.serialId {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        for v in &self.serialId {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCRemotes_Out {
+    fn new() -> getBCRemotes_Out {
+        getBCRemotes_Out::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCRemotes_Out>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::commontypes::SerialId>>(
+                    "serialId",
+                    getBCRemotes_Out::get_serialId_for_reflect,
+                    getBCRemotes_Out::mut_serialId_for_reflect,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<getBCRemotes_Out>(
+                    "getBCRemotes_Out",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCRemotes_Out {
+    fn clear(&mut self) {
+        self.clear_serialId();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCRemotes_Out {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCRemotes_Out {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCMaster {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCMaster {}
+
+impl getBCMaster {
+    pub fn new() -> getBCMaster {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCMaster {
+        static mut instance: ::protobuf::lazy::Lazy<getBCMaster> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCMaster,
+        };
+        unsafe {
+            instance.get(getBCMaster::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCMaster {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCMaster {
+    fn new() -> getBCMaster {
+        getBCMaster::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCMaster>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCMaster>(
+                    "getBCMaster",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCMaster {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCMaster {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCMaster {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCMaster_In {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCMaster_In {}
+
+impl getBCMaster_In {
+    pub fn new() -> getBCMaster_In {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCMaster_In {
+        static mut instance: ::protobuf::lazy::Lazy<getBCMaster_In> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCMaster_In,
+        };
+        unsafe {
+            instance.get(getBCMaster_In::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCMaster_In {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCMaster_In {
+    fn new() -> getBCMaster_In {
+        getBCMaster_In::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCMaster_In>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCMaster_In>(
+                    "getBCMaster_In",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCMaster_In {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCMaster_In {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCMaster_In {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCMaster_Out {
+    // message fields
+    serialId: ::protobuf::SingularPtrField<super::commontypes::SerialId>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCMaster_Out {}
+
+impl getBCMaster_Out {
+    pub fn new() -> getBCMaster_Out {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCMaster_Out {
+        static mut instance: ::protobuf::lazy::Lazy<getBCMaster_Out> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCMaster_Out,
+        };
+        unsafe {
+            instance.get(getBCMaster_Out::new)
+        }
+    }
+
+    // optional .linkbot.SerialId serialId = 1;
+
+    pub fn clear_serialId(&mut self) {
+        self.serialId.clear();
+    }
+
+    pub fn has_serialId(&self) -> bool {
+        self.serialId.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_serialId(&mut self, v: super::commontypes::SerialId) {
+        self.serialId = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_serialId(&mut self) -> &mut super::commontypes::SerialId {
+        if self.serialId.is_none() {
+            self.serialId.set_default();
+        }
+        self.serialId.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_serialId(&mut self) -> super::commontypes::SerialId {
+        self.serialId.take().unwrap_or_else(|| super::commontypes::SerialId::new())
+    }
+
+    pub fn get_serialId(&self) -> &super::commontypes::SerialId {
+        self.serialId.as_ref().unwrap_or_else(|| super::commontypes::SerialId::default_instance())
+    }
+
+    fn get_serialId_for_reflect(&self) -> &::protobuf::SingularPtrField<super::commontypes::SerialId> {
+        &self.serialId
+    }
+
+    fn mut_serialId_for_reflect(&mut self) -> &mut ::protobuf::SingularPtrField<super::commontypes::SerialId> {
+        &mut self.serialId
+    }
+}
+
+impl ::protobuf::Message for getBCMaster_Out {
+    fn is_initialized(&self) -> bool {
+        for v in &self.serialId {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.serialId)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if let Some(ref v) = self.serialId.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if let Some(ref v) = self.serialId.as_ref() {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCMaster_Out {
+    fn new() -> getBCMaster_Out {
+        getBCMaster_Out::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCMaster_Out>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::commontypes::SerialId>>(
+                    "serialId",
+                    getBCMaster_Out::get_serialId_for_reflect,
+                    getBCMaster_Out::mut_serialId_for_reflect,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<getBCMaster_Out>(
+                    "getBCMaster_Out",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCMaster_Out {
+    fn clear(&mut self) {
+        self.clear_serialId();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCMaster_Out {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCMaster_Out {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCPoses {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCPoses {}
+
+impl getBCPoses {
+    pub fn new() -> getBCPoses {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCPoses {
+        static mut instance: ::protobuf::lazy::Lazy<getBCPoses> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCPoses,
+        };
+        unsafe {
+            instance.get(getBCPoses::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCPoses {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCPoses {
+    fn new() -> getBCPoses {
+        getBCPoses::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCPoses>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCPoses>(
+                    "getBCPoses",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCPoses {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCPoses {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCPoses {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCPoses_In {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCPoses_In {}
+
+impl getBCPoses_In {
+    pub fn new() -> getBCPoses_In {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCPoses_In {
+        static mut instance: ::protobuf::lazy::Lazy<getBCPoses_In> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCPoses_In,
+        };
+        unsafe {
+            instance.get(getBCPoses_In::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for getBCPoses_In {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCPoses_In {
+    fn new() -> getBCPoses_In {
+        getBCPoses_In::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCPoses_In>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<getBCPoses_In>(
+                    "getBCPoses_In",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCPoses_In {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCPoses_In {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCPoses_In {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCPoses_Out {
+    // message fields
+    angles: ::protobuf::RepeatedField<getBCPoses_Out_Angles>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCPoses_Out {}
+
+impl getBCPoses_Out {
+    pub fn new() -> getBCPoses_Out {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCPoses_Out {
+        static mut instance: ::protobuf::lazy::Lazy<getBCPoses_Out> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCPoses_Out,
+        };
+        unsafe {
+            instance.get(getBCPoses_Out::new)
+        }
+    }
+
+    // repeated .linkbot.robot.getBCPoses.Out.Angles angles = 1;
+
+    pub fn clear_angles(&mut self) {
+        self.angles.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_angles(&mut self, v: ::protobuf::RepeatedField<getBCPoses_Out_Angles>) {
+        self.angles = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_angles(&mut self) -> &mut ::protobuf::RepeatedField<getBCPoses_Out_Angles> {
+        &mut self.angles
+    }
+
+    // Take field
+    pub fn take_angles(&mut self) -> ::protobuf::RepeatedField<getBCPoses_Out_Angles> {
+        ::std::mem::replace(&mut self.angles, ::protobuf::RepeatedField::new())
+    }
+
+    pub fn get_angles(&self) -> &[getBCPoses_Out_Angles] {
+        &self.angles
+    }
+
+    fn get_angles_for_reflect(&self) -> &::protobuf::RepeatedField<getBCPoses_Out_Angles> {
+        &self.angles
+    }
+
+    fn mut_angles_for_reflect(&mut self) -> &mut ::protobuf::RepeatedField<getBCPoses_Out_Angles> {
+        &mut self.angles
+    }
+}
+
+impl ::protobuf::Message for getBCPoses_Out {
+    fn is_initialized(&self) -> bool {
+        for v in &self.angles {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.angles)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        for value in &self.angles {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        for v in &self.angles {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCPoses_Out {
+    fn new() -> getBCPoses_Out {
+        getBCPoses_Out::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCPoses_Out>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<getBCPoses_Out_Angles>>(
+                    "angles",
+                    getBCPoses_Out::get_angles_for_reflect,
+                    getBCPoses_Out::mut_angles_for_reflect,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<getBCPoses_Out>(
+                    "getBCPoses_Out",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCPoses_Out {
+    fn clear(&mut self) {
+        self.clear_angles();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCPoses_Out {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCPoses_Out {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct getBCPoses_Out_Angles {
+    // message fields
+    a1: ::std::option::Option<f32>,
+    a2: ::std::option::Option<f32>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for getBCPoses_Out_Angles {}
+
+impl getBCPoses_Out_Angles {
+    pub fn new() -> getBCPoses_Out_Angles {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static getBCPoses_Out_Angles {
+        static mut instance: ::protobuf::lazy::Lazy<getBCPoses_Out_Angles> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const getBCPoses_Out_Angles,
+        };
+        unsafe {
+            instance.get(getBCPoses_Out_Angles::new)
+        }
+    }
+
+    // required float a1 = 1;
+
+    pub fn clear_a1(&mut self) {
+        self.a1 = ::std::option::Option::None;
+    }
+
+    pub fn has_a1(&self) -> bool {
+        self.a1.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_a1(&mut self, v: f32) {
+        self.a1 = ::std::option::Option::Some(v);
+    }
+
+    pub fn get_a1(&self) -> f32 {
+        self.a1.unwrap_or(0.)
+    }
+
+    fn get_a1_for_reflect(&self) -> &::std::option::Option<f32> {
+        &self.a1
+    }
+
+    fn mut_a1_for_reflect(&mut self) -> &mut ::std::option::Option<f32> {
+        &mut self.a1
+    }
+
+    // required float a2 = 2;
+
+    pub fn clear_a2(&mut self) {
+        self.a2 = ::std::option::Option::None;
+    }
+
+    pub fn has_a2(&self) -> bool {
+        self.a2.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_a2(&mut self, v: f32) {
+        self.a2 = ::std::option::Option::Some(v);
+    }
+
+    pub fn get_a2(&self) -> f32 {
+        self.a2.unwrap_or(0.)
+    }
+
+    fn get_a2_for_reflect(&self) -> &::std::option::Option<f32> {
+        &self.a2
+    }
+
+    fn mut_a2_for_reflect(&mut self) -> &mut ::std::option::Option<f32> {
+        &mut self.a2
+    }
+}
+
+impl ::protobuf::Message for getBCPoses_Out_Angles {
+    fn is_initialized(&self) -> bool {
+        if self.a1.is_none() {
+            return false;
+        }
+        if self.a2.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeFixed32 {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_float()?;
+                    self.a1 = ::std::option::Option::Some(tmp);
+                },
+                2 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeFixed32 {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_float()?;
+                    self.a2 = ::std::option::Option::Some(tmp);
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if let Some(v) = self.a1 {
+            my_size += 5;
+        }
+        if let Some(v) = self.a2 {
+            my_size += 5;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if let Some(v) = self.a1 {
+            os.write_float(1, v)?;
+        }
+        if let Some(v) = self.a2 {
+            os.write_float(2, v)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for getBCPoses_Out_Angles {
+    fn new() -> getBCPoses_Out_Angles {
+        getBCPoses_Out_Angles::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<getBCPoses_Out_Angles>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_option_accessor::<_, ::protobuf::types::ProtobufTypeFloat>(
+                    "a1",
+                    getBCPoses_Out_Angles::get_a1_for_reflect,
+                    getBCPoses_Out_Angles::mut_a1_for_reflect,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_option_accessor::<_, ::protobuf::types::ProtobufTypeFloat>(
+                    "a2",
+                    getBCPoses_Out_Angles::get_a2_for_reflect,
+                    getBCPoses_Out_Angles::mut_a2_for_reflect,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<getBCPoses_Out_Angles>(
+                    "getBCPoses_Out_Angles",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for getBCPoses_Out_Angles {
+    fn clear(&mut self) {
+        self.clear_a1();
+        self.clear_a2();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for getBCPoses_Out_Angles {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for getBCPoses_Out_Angles {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
 pub struct RpcRequest {
     // message fields
     requestId: ::std::option::Option<u32>,
@@ -20047,6 +21564,9 @@ pub enum RpcRequest_oneof_arg {
     writeTwi(writeTwi_In),
     readTwi(readTwi_In),
     writeReadTwi(writeReadTwi_In),
+    getBCRemotes(getBCRemotes_In),
+    getBCMaster(getBCMaster_In),
+    getBCPoses(getBCPoses_In),
 }
 
 impl RpcRequest {
@@ -22148,6 +23668,153 @@ impl RpcRequest {
             _ => writeReadTwi_In::default_instance(),
         }
     }
+
+    // optional .linkbot.robot.getBCRemotes.In getBCRemotes = 54;
+
+    pub fn clear_getBCRemotes(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCRemotes(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCRemotes(&mut self, v: getBCRemotes_In) {
+        self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCRemotes(&mut self) -> &mut getBCRemotes_In {
+        if let ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(getBCRemotes_In::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCRemotes(&mut self) -> getBCRemotes_In {
+        if self.has_getBCRemotes() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCRemotes_In::new()
+        }
+    }
+
+    pub fn get_getBCRemotes(&self) -> &getBCRemotes_In {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(ref v)) => v,
+            _ => getBCRemotes_In::default_instance(),
+        }
+    }
+
+    // optional .linkbot.robot.getBCMaster.In getBCMaster = 55;
+
+    pub fn clear_getBCMaster(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCMaster(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCMaster(&mut self, v: getBCMaster_In) {
+        self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCMaster(&mut self) -> &mut getBCMaster_In {
+        if let ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(getBCMaster_In::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCMaster(&mut self) -> getBCMaster_In {
+        if self.has_getBCMaster() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCMaster_In::new()
+        }
+    }
+
+    pub fn get_getBCMaster(&self) -> &getBCMaster_In {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(ref v)) => v,
+            _ => getBCMaster_In::default_instance(),
+        }
+    }
+
+    // optional .linkbot.robot.getBCPoses.In getBCPoses = 56;
+
+    pub fn clear_getBCPoses(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCPoses(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCPoses(&mut self, v: getBCPoses_In) {
+        self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCPoses(&mut self) -> &mut getBCPoses_In {
+        if let ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(getBCPoses_In::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCPoses(&mut self) -> getBCPoses_In {
+        if self.has_getBCPoses() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCPoses_In::new()
+        }
+    }
+
+    pub fn get_getBCPoses(&self) -> &getBCPoses_In {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(ref v)) => v,
+            _ => getBCPoses_In::default_instance(),
+        }
+    }
 }
 
 impl ::protobuf::Message for RpcRequest {
@@ -22358,6 +24025,21 @@ impl ::protobuf::Message for RpcRequest {
             }
         }
         if let Some(RpcRequest_oneof_arg::writeReadTwi(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcRequest_oneof_arg::getBCRemotes(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcRequest_oneof_arg::getBCMaster(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcRequest_oneof_arg::getBCPoses(ref v)) = self.arg {
             if !v.is_initialized() {
                 return false;
             }
@@ -22628,6 +24310,24 @@ impl ::protobuf::Message for RpcRequest {
                     }
                     self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::writeReadTwi(is.read_message()?));
                 },
+                54 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCRemotes(is.read_message()?));
+                },
+                55 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCMaster(is.read_message()?));
+                },
+                56 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::getBCPoses(is.read_message()?));
+                },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
                 },
@@ -22810,6 +24510,18 @@ impl ::protobuf::Message for RpcRequest {
                     my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
                 &RpcRequest_oneof_arg::writeReadTwi(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcRequest_oneof_arg::getBCRemotes(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcRequest_oneof_arg::getBCMaster(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcRequest_oneof_arg::getBCPoses(ref v) => {
                     let len = v.compute_size();
                     my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
@@ -23033,6 +24745,21 @@ impl ::protobuf::Message for RpcRequest {
                 },
                 &RpcRequest_oneof_arg::writeReadTwi(ref v) => {
                     os.write_tag(52, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcRequest_oneof_arg::getBCRemotes(ref v) => {
+                    os.write_tag(54, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcRequest_oneof_arg::getBCMaster(ref v) => {
+                    os.write_tag(55, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcRequest_oneof_arg::getBCPoses(ref v) => {
+                    os.write_tag(56, ::protobuf::wire_format::WireTypeLengthDelimited)?;
                     os.write_raw_varint32(v.get_cached_size())?;
                     v.write_to_with_cached_sizes(os)?;
                 },
@@ -23297,6 +25024,21 @@ impl ::protobuf::MessageStatic for RpcRequest {
                     RpcRequest::has_writeReadTwi,
                     RpcRequest::get_writeReadTwi,
                 ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCRemotes_In>(
+                    "getBCRemotes",
+                    RpcRequest::has_getBCRemotes,
+                    RpcRequest::get_getBCRemotes,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCMaster_In>(
+                    "getBCMaster",
+                    RpcRequest::has_getBCMaster,
+                    RpcRequest::get_getBCMaster,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCPoses_In>(
+                    "getBCPoses",
+                    RpcRequest::has_getBCPoses,
+                    RpcRequest::get_getBCPoses,
+                ));
                 ::protobuf::reflect::MessageDescriptor::new::<RpcRequest>(
                     "RpcRequest",
                     fields,
@@ -23352,6 +25094,9 @@ impl ::protobuf::Clear for RpcRequest {
         self.clear_writeTwi();
         self.clear_readTwi();
         self.clear_writeReadTwi();
+        self.clear_getBCRemotes();
+        self.clear_getBCMaster();
+        self.clear_getBCPoses();
         self.unknown_fields.clear();
     }
 }
@@ -23426,6 +25171,9 @@ pub enum RpcReply_oneof_arg {
     writeTwi(writeTwi_Out),
     readTwi(readTwi_Out),
     writeReadTwi(writeReadTwi_Out),
+    getBCRemotes(getBCRemotes_Out),
+    getBCMaster(getBCMaster_Out),
+    getBCPoses(getBCPoses_Out),
 }
 
 impl RpcReply {
@@ -25527,6 +27275,153 @@ impl RpcReply {
             _ => writeReadTwi_Out::default_instance(),
         }
     }
+
+    // optional .linkbot.robot.getBCRemotes.Out getBCRemotes = 54;
+
+    pub fn clear_getBCRemotes(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCRemotes(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCRemotes(&mut self, v: getBCRemotes_Out) {
+        self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCRemotes(&mut self) -> &mut getBCRemotes_Out {
+        if let ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(getBCRemotes_Out::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCRemotes(&mut self) -> getBCRemotes_Out {
+        if self.has_getBCRemotes() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCRemotes_Out::new()
+        }
+    }
+
+    pub fn get_getBCRemotes(&self) -> &getBCRemotes_Out {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(ref v)) => v,
+            _ => getBCRemotes_Out::default_instance(),
+        }
+    }
+
+    // optional .linkbot.robot.getBCMaster.Out getBCMaster = 55;
+
+    pub fn clear_getBCMaster(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCMaster(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCMaster(&mut self, v: getBCMaster_Out) {
+        self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCMaster(&mut self) -> &mut getBCMaster_Out {
+        if let ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(getBCMaster_Out::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCMaster(&mut self) -> getBCMaster_Out {
+        if self.has_getBCMaster() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCMaster_Out::new()
+        }
+    }
+
+    pub fn get_getBCMaster(&self) -> &getBCMaster_Out {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(ref v)) => v,
+            _ => getBCMaster_Out::default_instance(),
+        }
+    }
+
+    // optional .linkbot.robot.getBCPoses.Out getBCPoses = 56;
+
+    pub fn clear_getBCPoses(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_getBCPoses(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_getBCPoses(&mut self, v: getBCPoses_Out) {
+        self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_getBCPoses(&mut self) -> &mut getBCPoses_Out {
+        if let ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(getBCPoses_Out::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_getBCPoses(&mut self) -> getBCPoses_Out {
+        if self.has_getBCPoses() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            getBCPoses_Out::new()
+        }
+    }
+
+    pub fn get_getBCPoses(&self) -> &getBCPoses_Out {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(ref v)) => v,
+            _ => getBCPoses_Out::default_instance(),
+        }
+    }
 }
 
 impl ::protobuf::Message for RpcReply {
@@ -25737,6 +27632,21 @@ impl ::protobuf::Message for RpcReply {
             }
         }
         if let Some(RpcReply_oneof_arg::writeReadTwi(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcReply_oneof_arg::getBCRemotes(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcReply_oneof_arg::getBCMaster(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcReply_oneof_arg::getBCPoses(ref v)) = self.arg {
             if !v.is_initialized() {
                 return false;
             }
@@ -26007,6 +27917,24 @@ impl ::protobuf::Message for RpcReply {
                     }
                     self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::writeReadTwi(is.read_message()?));
                 },
+                54 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCRemotes(is.read_message()?));
+                },
+                55 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCMaster(is.read_message()?));
+                },
+                56 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::getBCPoses(is.read_message()?));
+                },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
                 },
@@ -26189,6 +28117,18 @@ impl ::protobuf::Message for RpcReply {
                     my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
                 &RpcReply_oneof_arg::writeReadTwi(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcReply_oneof_arg::getBCRemotes(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcReply_oneof_arg::getBCMaster(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcReply_oneof_arg::getBCPoses(ref v) => {
                     let len = v.compute_size();
                     my_size += 2 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
@@ -26412,6 +28352,21 @@ impl ::protobuf::Message for RpcReply {
                 },
                 &RpcReply_oneof_arg::writeReadTwi(ref v) => {
                     os.write_tag(52, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcReply_oneof_arg::getBCRemotes(ref v) => {
+                    os.write_tag(54, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcReply_oneof_arg::getBCMaster(ref v) => {
+                    os.write_tag(55, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcReply_oneof_arg::getBCPoses(ref v) => {
+                    os.write_tag(56, ::protobuf::wire_format::WireTypeLengthDelimited)?;
                     os.write_raw_varint32(v.get_cached_size())?;
                     v.write_to_with_cached_sizes(os)?;
                 },
@@ -26676,6 +28631,21 @@ impl ::protobuf::MessageStatic for RpcReply {
                     RpcReply::has_writeReadTwi,
                     RpcReply::get_writeReadTwi,
                 ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCRemotes_Out>(
+                    "getBCRemotes",
+                    RpcReply::has_getBCRemotes,
+                    RpcReply::get_getBCRemotes,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCMaster_Out>(
+                    "getBCMaster",
+                    RpcReply::has_getBCMaster,
+                    RpcReply::get_getBCMaster,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, getBCPoses_Out>(
+                    "getBCPoses",
+                    RpcReply::has_getBCPoses,
+                    RpcReply::get_getBCPoses,
+                ));
                 ::protobuf::reflect::MessageDescriptor::new::<RpcReply>(
                     "RpcReply",
                     fields,
@@ -26731,6 +28701,9 @@ impl ::protobuf::Clear for RpcReply {
         self.clear_writeTwi();
         self.clear_readTwi();
         self.clear_writeReadTwi();
+        self.clear_getBCRemotes();
+        self.clear_getBCMaster();
+        self.clear_getBCPoses();
         self.unknown_fields.clear();
     }
 }
@@ -26875,18 +28848,10 @@ impl ::protobuf::Message for ButtonEvent {
                     self.timestamp = ::std::option::Option::Some(tmp);
                 },
                 2 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.button = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.button, 2, &mut self.unknown_fields)?
                 },
                 3 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.state = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.state, 3, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -27176,7 +29141,7 @@ impl ::protobuf::Message for EncoderEvent {
             my_size += ::protobuf::rt::value_size(2, v, ::protobuf::wire_format::WireTypeVarint);
         }
         if !self.values.is_empty() {
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(self.values.len() as u32) + (self.values.len() * 4) as u32;
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size((self.values.len() * 4) as u32) + (self.values.len() * 4) as u32;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -27765,11 +29730,7 @@ impl ::protobuf::Message for JointEvent {
                     self.joint = ::std::option::Option::Some(tmp);
                 },
                 3 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.event = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.event, 3, &mut self.unknown_fields)?
                 },
                 4 => {
                     if wire_type != ::protobuf::wire_format::WireTypeFixed32 {
@@ -30115,299 +32076,315 @@ impl ::protobuf::reflect::ProtobufValue for Peripheral {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0brobot.proto\x12\rlinkbot.robot\x1a\x0cnanopb.proto\"M\n\x14getAcce\
-    lerometerData\x1a\x04\n\x02In\x1a/\n\x03Out\x12\x0c\n\x01x\x18\x01\x20\
-    \x01(\x02R\x01x\x12\x0c\n\x01y\x18\x02\x20\x01(\x02R\x01y\x12\x0c\n\x01z\
-    \x18\x03\x20\x01(\x02R\x01z\".\n\x11getBatteryVoltage\x1a\x04\n\x02In\
-    \x1a\x13\n\x03Out\x12\x0c\n\x01v\x18\x01\x20\x01(\x02R\x01v\"9\n\tgetAdc\
-    Raw\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\r\
-    R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"1\n\x0egetButtonState\x1a\x04\
-    \n\x02In\x1a\x19\n\x03Out\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\
-    \"7\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x1b\n\x03Out\x12\x14\n\
-    \x05value\x18\x01\x20\x01(\x02R\x05value\"^\n\x10getEncoderValues\x1a\
-    \x04\n\x02In\x1aD\n\x03Out\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttim\
-    estamp\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\
-    \x92?\x02\x10\x20\"E\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a#\
-    \n\x03Out\x12\x1c\n\x05value\x18\x01\x20\x01(\tR\x05valueB\x06\x92?\x03\
-    \x08\x80\x01\"M\n\rgetFormFactor\x1a\x04\n\x02In\x1a6\n\x03Out\x12/\n\
-    \x05value\x18\x01\x20\x01(\x0e2\x19.linkbot.robot.FormFactorR\x05value\"\
-    w\n\x0egetJointStates\x1a\x04\n\x02In\x1a_\n\x03Out\x12\x1c\n\ttimestamp\
-    \x18\x01\x20\x01(\rR\ttimestamp\x12:\n\x06values\x18\x02\x20\x03(\x0e2\
-    \x19.linkbot.robot.JointStateR\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"\
-    0\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x1b\n\x03Out\x12\x14\n\x05value\
-    \x18\x01\x20\x01(\rR\x05value\"G\n\x17getMotorControllerOmega\x1a\x04\n\
-    \x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\x02R\x06values\
-    B\x07\x10\x01\x92?\x02\x10\x20\"H\n\x18getMotorControllerAlphaI\x1a\x04\
-    \n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\x02R\x06valu\
-    esB\x07\x10\x01\x92?\x02\x10\x20\"H\n\x18getMotorControllerAlphaF\x1a\
-    \x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\x02R\x06\
-    valuesB\x07\x10\x01\x92?\x02\x10\x20\"R\n\"getMotorControllerProportiona\
-    lGain\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\
-    \x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"P\n\x20getMotorController\
-    IntegratorGain\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\
-    \x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"P\n\x20getMotorC\
-    ontrollerDerivativeGain\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06value\
-    s\x18\x01\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"Q\n!get\
-    MotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\
-    \x06values\x18\x01\x20\x03(\rR\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"\
-    M\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a&\n\x03Out\x12\
+    \n\x0brobot.proto\x12\rlinkbot.robot\x1a\x11commontypes.proto\x1a\x0cnan\
+    opb.proto\"M\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a/\n\x03Out\x12\
+    \x0c\n\x01x\x18\x01\x20\x01(\x02R\x01x\x12\x0c\n\x01y\x18\x02\x20\x01(\
+    \x02R\x01y\x12\x0c\n\x01z\x18\x03\x20\x01(\x02R\x01z\".\n\x11getBatteryV\
+    oltage\x1a\x04\n\x02In\x1a\x13\n\x03Out\x12\x0c\n\x01v\x18\x01\x20\x01(\
+    \x02R\x01v\"9\n\tgetAdcRaw\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06va\
+    lues\x18\x01\x20\x03(\rR\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"1\n\
+    \x0egetButtonState\x1a\x04\n\x02In\x1a\x19\n\x03Out\x12\x12\n\x04mask\
+    \x18\x01\x20\x01(\rR\x04mask\"7\n\x12getBuzzerFrequency\x1a\x04\n\x02In\
+    \x1a\x1b\n\x03Out\x12\x14\n\x05value\x18\x01\x20\x01(\x02R\x05value\"^\n\
+    \x10getEncoderValues\x1a\x04\n\x02In\x1aD\n\x03Out\x12\x1c\n\ttimestamp\
+    \x18\x01\x20\x01(\rR\ttimestamp\x12\x1f\n\x06values\x18\x02\x20\x03(\x02\
+    R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"E\n\x18getFirmwareVersionStri\
+    ng\x1a\x04\n\x02In\x1a#\n\x03Out\x12\x1c\n\x05value\x18\x01\x20\x01(\tR\
+    \x05valueB\x06\x92?\x03\x08\x80\x01\"M\n\rgetFormFactor\x1a\x04\n\x02In\
+    \x1a6\n\x03Out\x12/\n\x05value\x18\x01\x20\x01(\x0e2\x19.linkbot.robot.F\
+    ormFactorR\x05value\"w\n\x0egetJointStates\x1a\x04\n\x02In\x1a_\n\x03Out\
+    \x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\x12:\n\x06values\
+    \x18\x02\x20\x03(\x0e2\x19.linkbot.robot.JointStateR\x06valuesB\x07\x10\
+    \x01\x92?\x02\x10\x20\"0\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x1b\n\x03O\
+    ut\x12\x14\n\x05value\x18\x01\x20\x01(\rR\x05value\"G\n\x17getMotorContr\
+    ollerOmega\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\
+    \x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"H\n\x18getMotorContr\
+    ollerAlphaI\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\
+    \x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"H\n\x18getMotorC\
+    ontrollerAlphaF\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\
+    \x01\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"R\n\"getMoto\
+    rControllerProportionalGain\x1a\x04\n\x02In\x1a&\n\x03Out\x12\x1f\n\x06v\
+    alues\x18\x01\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\"P\n\
+    \x20getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a&\n\x03Out\x12\
     \x1f\n\x06values\x18\x01\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\
-    \x10\x20\"[\n\x17setMotorControllerOmega\x1a9\n\x02In\x12\x12\n\x04mask\
-    \x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\
-    \x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"\\\n\x18setMo\
-    torControllerAlphaI\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\
-    \x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\
-    \x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"\\\n\x18setMotorControllerAlphaF\
-    \x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\
-    \x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\
-    \x1a\x05\n\x03Out\"f\n\"setMotorControllerProportionalGain\x1a9\n\x02In\
-    \x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\
-    \x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03\
-    Out\"d\n\x20setMotorControllerIntegratorGain\x1a9\n\x02In\x12\x12\n\x04m\
-    ask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02\
-    R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"d\n\x20setMo\
-    torControllerDerivativeGain\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\
-    \x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\
-    \x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"e\n!setMotorControllerSa\
-    fetyThreshold\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\
-    \x12\x1f\n\x06values\x18\x02\x20\x03(\rR\x06valuesB\x07\x10\x01\x92?\x02\
-    \x10\x20\x1a\x05\n\x03Out\"a\n\x1dsetMotorControllerSafetyAngle\x1a9\n\
+    \x10\x20\"P\n\x20getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a&\n\
+    \x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\x02R\x06valuesB\x07\x10\x01\
+    \x92?\x02\x10\x20\"Q\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\
+    \x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\rR\x06valuesB\x07\
+    \x10\x01\x92?\x02\x10\x20\"M\n\x1dgetMotorControllerSafetyAngle\x1a\x04\
+    \n\x02In\x1a&\n\x03Out\x12\x1f\n\x06values\x18\x01\x20\x03(\x02R\x06valu\
+    esB\x07\x10\x01\x92?\x02\x10\x20\"[\n\x17setMotorControllerOmega\x1a9\n\
     \x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\
     \x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\
-    \x03Out\"i\n\x14setResetOnDisconnect\x1aJ\n\x02In\x12\x12\n\x04mask\x18\
-    \x01\x20\x01(\rR\x04mask\x120\n\x13peripheralResetMask\x18\x02\x20\x01(\
-    \rR\x13peripheralResetMask\x1a\x05\n\x03Out\"\x1f\n\x10resetEncoderRevs\
-    \x1a\x04\n\x02In\x1a\x05\n\x03Out\"7\n\x12setBuzzerFrequency\x1a\x1a\n\
-    \x02In\x12\x14\n\x05value\x18\x01\x20\x01(\x02R\x05value\x1a\x05\n\x03Ou\
-    t\"0\n\x0bsetLedColor\x1a\x1a\n\x02In\x12\x14\n\x05value\x18\x01\x20\x01\
-    (\rR\x05value\x1a\x05\n\x03Out\"'\n\x04stop\x1a\x18\n\x02In\x12\x12\n\
-    \x04mask\x18\x01\x20\x01(\rR\x04mask\x1a\x05\n\x03Out\"\xee\x02\n\x04Goa\
-    l\x12,\n\x04type\x18\x01\x20\x01(\x0e2\x18.linkbot.robot.Goal.TypeR\x04t\
-    ype\x12\x12\n\x04goal\x18\x02\x20\x01(\x02R\x04goal\x12>\n\ncontroller\
-    \x18\x03\x20\x01(\x0e2\x1e.linkbot.robot.Goal.ControllerR\ncontroller\
-    \x12\x18\n\x07timeout\x18\x04\x20\x01(\x02R\x07timeout\x12?\n\rmodeOnTim\
-    eout\x18\x05\x20\x01(\x0e2\x19.linkbot.robot.JointStateR\rmodeOnTimeout\
-    \"0\n\x04Type\x12\x0c\n\x08ABSOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\
-    \x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\
-    \x01\x12\x0c\n\x08CONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\
-    ACCEL\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\
-    \xc8\x01\n\trobotMove\x1a\xb3\x01\n\x02In\x127\n\x0cmotorOneGoal\x18\x01\
-    \x20\x01(\x0b2\x13.linkbot.robot.GoalR\x0cmotorOneGoal\x127\n\x0cmotorTw\
-    oGoal\x18\x02\x20\x01(\x0b2\x13.linkbot.robot.GoalR\x0cmotorTwoGoal\x12;\
-    \n\x0emotorThreeGoal\x18\x03\x20\x01(\x0b2\x13.linkbot.robot.GoalR\x0emo\
-    torThreeGoal\x1a\x05\n\x03Out\"a\n\x18enableAccelerometerEvent\x1a>\n\
-    \x02In\x12\x16\n\x06enable\x18\x01\x20\x01(\x08R\x06enable\x12\x20\n\x0b\
-    granularity\x18\x02\x20\x01(\x02R\x0bgranularity\x1a\x05\n\x03Out\"8\n\
-    \x11enableButtonEvent\x1a\x1c\n\x02In\x12\x16\n\x06enable\x18\x01\x20\
-    \x01(\x08R\x06enable\x1a\x05\n\x03Out\"\xe5\x02\n\x12enableEncoderEvent\
-    \x1a\xc7\x02\n\x02In\x12P\n\nencoderOne\x18\x01\x20\x01(\x0b20.linkbot.r\
-    obot.enableEncoderEvent.In.SignalStateR\nencoderOne\x12P\n\nencoderTwo\
-    \x18\x02\x20\x01(\x0b20.linkbot.robot.enableEncoderEvent.In.SignalStateR\
-    \nencoderTwo\x12T\n\x0cencoderThree\x18\x03\x20\x01(\x0b20.linkbot.robot\
-    .enableEncoderEvent.In.SignalStateR\x0cencoderThree\x1aG\n\x0bSignalStat\
-    e\x12\x16\n\x06enable\x18\x01\x20\x01(\x08R\x06enable\x12\x20\n\x0bgranu\
-    larity\x18\x02\x20\x01(\x02R\x0bgranularity\x1a\x05\n\x03Out\"7\n\x10ena\
-    bleJointEvent\x1a\x1c\n\x02In\x12\x16\n\x06enable\x18\x01\x20\x01(\x08R\
-    \x06enable\x1a\x05\n\x03Out\"P\n\x0bwriteEeprom\x1a:\n\x02In\x12\x18\n\
-    \x07address\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\x04data\x18\x02\x20\
-    \x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"c\n\nread\
-    Eeprom\x1a2\n\x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\x07address\
-    \x12\x12\n\x04size\x18\x02\x20\x01(\rR\x04size\x1a!\n\x03Out\x12\x1a\n\
-    \x04data\x18\x01\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\"M\n\
-    \x08writeTwi\x1a:\n\x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\x07ad\
-    dress\x12\x1a\n\x04data\x18\x02\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\
-    \x80\x01\x1a\x05\n\x03Out\"h\n\x07readTwi\x1a:\n\x02In\x12\x18\n\x07addr\
-    ess\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\x08recvsize\x18\x02\x20\x01\
-    (\rR\x08recvsize\x1a!\n\x03Out\x12\x1a\n\x04data\x18\x02\x20\x01(\x0cR\
-    \x04dataB\x06\x92?\x03\x08\x80\x01\"\x89\x01\n\x0cwriteReadTwi\x1aV\n\
-    \x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\x08\
-    recvsize\x18\x02\x20\x01(\rR\x08recvsize\x12\x1a\n\x04data\x18\x03\x20\
-    \x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\x1a!\n\x03Out\x12\x1a\n\x04\
-    data\x18\x02\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\"\x15\n\x06\
-    reboot\x1a\x04\n\x02In\x1a\x05\n\x03Out\"\xf8\x1e\n\nRpcRequest\x12\x1c\
-    \n\trequestId\x18\x01\x20\x01(\rR\trequestId\x12h\n\x18getFirmwareVersio\
-    nString\x18\x10\x20\x01(\x0b2*.linkbot.robot.getFirmwareVersionString.In\
-    H\0R\x18getFirmwareVersionString\x12G\n\rgetFormFactor\x18\x11\x20\x01(\
-    \x0b2\x1f.linkbot.robot.getFormFactor.InH\0R\rgetFormFactor\x12;\n\tgetA\
-    dcRaw\x18\x12\x20\x01(\x0b2\x1b.linkbot.robot.getAdcRaw.InH\0R\tgetAdcRa\
-    w\x12S\n\x11getBatteryVoltage\x18\x13\x20\x01(\x0b2#.linkbot.robot.getBa\
-    tteryVoltage.InH\0R\x11getBatteryVoltage\x12\\\n\x14getAccelerometerData\
-    \x18\x14\x20\x01(\x0b2&.linkbot.robot.getAccelerometerData.InH\0R\x14get\
-    AccelerometerData\x12J\n\x0egetButtonState\x18\x15\x20\x01(\x0b2\x20.lin\
-    kbot.robot.getButtonState.InH\0R\x0egetButtonState\x12P\n\x10getEncoderV\
-    alues\x18\x16\x20\x01(\x0b2\".linkbot.robot.getEncoderValues.InH\0R\x10g\
-    etEncoderValues\x12J\n\x0egetJointStates\x18\x17\x20\x01(\x0b2\x20.linkb\
-    ot.robot.getJointStates.InH\0R\x0egetJointStates\x12h\n\x18enableAcceler\
-    ometerEvent\x18\x18\x20\x01(\x0b2*.linkbot.robot.enableAccelerometerEven\
-    t.InH\0R\x18enableAccelerometerEvent\x12S\n\x11enableButtonEvent\x18\x19\
-    \x20\x01(\x0b2#.linkbot.robot.enableButtonEvent.InH\0R\x11enableButtonEv\
-    ent\x12V\n\x12enableEncoderEvent\x18\x1a\x20\x01(\x0b2$.linkbot.robot.en\
-    ableEncoderEvent.InH\0R\x12enableEncoderEvent\x12P\n\x10enableJointEvent\
-    \x18\x1b\x20\x01(\x0b2\".linkbot.robot.enableJointEvent.InH\0R\x10enable\
-    JointEvent\x12V\n\x12getBuzzerFrequency\x18\x02\x20\x01(\x0b2$.linkbot.r\
-    obot.getBuzzerFrequency.InH\0R\x12getBuzzerFrequency\x12A\n\x0bgetLedCol\
-    or\x18\x03\x20\x01(\x0b2\x1d.linkbot.robot.getLedColor.InH\0R\x0bgetLedC\
-    olor\x12e\n\x17getMotorControllerOmega\x18\x1c\x20\x01(\x0b2).linkbot.ro\
-    bot.getMotorControllerOmega.InH\0R\x17getMotorControllerOmega\x12h\n\x18\
-    getMotorControllerAlphaI\x18\x1d\x20\x01(\x0b2*.linkbot.robot.getMotorCo\
-    ntrollerAlphaI.InH\0R\x18getMotorControllerAlphaI\x12h\n\x18getMotorCont\
-    rollerAlphaF\x18\x1e\x20\x01(\x0b2*.linkbot.robot.getMotorControllerAlph\
-    aF.InH\0R\x18getMotorControllerAlphaF\x12\x86\x01\n\"getMotorControllerP\
-    roportionalGain\x18\x1f\x20\x01(\x0b24.linkbot.robot.getMotorControllerP\
-    roportionalGain.InH\0R\"getMotorControllerProportionalGain\x12\x80\x01\n\
-    \x20getMotorControllerIntegratorGain\x18\x20\x20\x01(\x0b22.linkbot.robo\
-    t.getMotorControllerIntegratorGain.InH\0R\x20getMotorControllerIntegrato\
-    rGain\x12\x80\x01\n\x20getMotorControllerDerivativeGain\x18!\x20\x01(\
-    \x0b22.linkbot.robot.getMotorControllerDerivativeGain.InH\0R\x20getMotor\
-    ControllerDerivativeGain\x12\x83\x01\n!getMotorControllerSafetyThreshold\
-    \x18\"\x20\x01(\x0b23.linkbot.robot.getMotorControllerSafetyThreshold.In\
-    H\0R!getMotorControllerSafetyThreshold\x12w\n\x1dgetMotorControllerSafet\
-    yAngle\x18#\x20\x01(\x0b2/.linkbot.robot.getMotorControllerSafetyAngle.I\
-    nH\0R\x1dgetMotorControllerSafetyAngle\x12V\n\x12setBuzzerFrequency\x18\
-    \x04\x20\x01(\x0b2$.linkbot.robot.setBuzzerFrequency.InH\0R\x12setBuzzer\
-    Frequency\x12A\n\x0bsetLedColor\x18\x05\x20\x01(\x0b2\x1d.linkbot.robot.\
-    setLedColor.InH\0R\x0bsetLedColor\x12e\n\x17setMotorControllerOmega\x18$\
-    \x20\x01(\x0b2).linkbot.robot.setMotorControllerOmega.InH\0R\x17setMotor\
-    ControllerOmega\x12h\n\x18setMotorControllerAlphaI\x18%\x20\x01(\x0b2*.l\
-    inkbot.robot.setMotorControllerAlphaI.InH\0R\x18setMotorControllerAlphaI\
-    \x12h\n\x18setMotorControllerAlphaF\x18&\x20\x01(\x0b2*.linkbot.robot.se\
-    tMotorControllerAlphaF.InH\0R\x18setMotorControllerAlphaF\x12\x86\x01\n\
-    \"setMotorControllerProportionalGain\x18'\x20\x01(\x0b24.linkbot.robot.s\
-    etMotorControllerProportionalGain.InH\0R\"setMotorControllerProportional\
-    Gain\x12\x80\x01\n\x20setMotorControllerIntegratorGain\x18(\x20\x01(\x0b\
-    22.linkbot.robot.setMotorControllerIntegratorGain.InH\0R\x20setMotorCont\
-    rollerIntegratorGain\x12\x80\x01\n\x20setMotorControllerDerivativeGain\
-    \x18)\x20\x01(\x0b22.linkbot.robot.setMotorControllerDerivativeGain.InH\
-    \0R\x20setMotorControllerDerivativeGain\x12\x83\x01\n!setMotorController\
-    SafetyThreshold\x18*\x20\x01(\x0b23.linkbot.robot.setMotorControllerSafe\
-    tyThreshold.InH\0R!setMotorControllerSafetyThreshold\x12w\n\x1dsetMotorC\
-    ontrollerSafetyAngle\x18+\x20\x01(\x0b2/.linkbot.robot.setMotorControlle\
-    rSafetyAngle.InH\0R\x1dsetMotorControllerSafetyAngle\x12\\\n\x14setReset\
-    OnDisconnect\x185\x20\x01(\x0b2&.linkbot.robot.setResetOnDisconnect.InH\
-    \0R\x14setResetOnDisconnect\x12P\n\x10resetEncoderRevs\x18,\x20\x01(\x0b\
-    2\".linkbot.robot.resetEncoderRevs.InH\0R\x10resetEncoderRevs\x12;\n\tro\
-    botMove\x18-\x20\x01(\x0b2\x1b.linkbot.robot.robotMove.InH\0R\trobotMove\
-    \x12,\n\x04stop\x18.\x20\x01(\x0b2\x16.linkbot.robot.stop.InH\0R\x04stop\
-    \x122\n\x06reboot\x18/\x20\x01(\x0b2\x18.linkbot.robot.reboot.InH\0R\x06\
-    reboot\x12A\n\x0bwriteEeprom\x180\x20\x01(\x0b2\x1d.linkbot.robot.writeE\
-    eprom.InH\0R\x0bwriteEeprom\x12>\n\nreadEeprom\x181\x20\x01(\x0b2\x1c.li\
-    nkbot.robot.readEeprom.InH\0R\nreadEeprom\x128\n\x08writeTwi\x182\x20\
-    \x01(\x0b2\x1a.linkbot.robot.writeTwi.InH\0R\x08writeTwi\x125\n\x07readT\
-    wi\x183\x20\x01(\x0b2\x19.linkbot.robot.readTwi.InH\0R\x07readTwi\x12D\n\
-    \x0cwriteReadTwi\x184\x20\x01(\x0b2\x1e.linkbot.robot.writeReadTwi.InH\0\
-    R\x0cwriteReadTwiB\x05\n\x03arg\"\xa0\x1f\n\x08RpcReply\x12\x1c\n\treque\
-    stId\x18\x01\x20\x01(\rR\trequestId\x12i\n\x18getFirmwareVersionString\
-    \x18\x10\x20\x01(\x0b2+.linkbot.robot.getFirmwareVersionString.OutH\0R\
-    \x18getFirmwareVersionString\x12H\n\rgetFormFactor\x18\x11\x20\x01(\x0b2\
-    \x20.linkbot.robot.getFormFactor.OutH\0R\rgetFormFactor\x12<\n\tgetAdcRa\
-    w\x18\x12\x20\x01(\x0b2\x1c.linkbot.robot.getAdcRaw.OutH\0R\tgetAdcRaw\
-    \x12T\n\x11getBatteryVoltage\x18\x13\x20\x01(\x0b2$.linkbot.robot.getBat\
-    teryVoltage.OutH\0R\x11getBatteryVoltage\x12]\n\x14getAccelerometerData\
-    \x18\x14\x20\x01(\x0b2'.linkbot.robot.getAccelerometerData.OutH\0R\x14ge\
-    tAccelerometerData\x12K\n\x0egetButtonState\x18\x15\x20\x01(\x0b2!.linkb\
-    ot.robot.getButtonState.OutH\0R\x0egetButtonState\x12Q\n\x10getEncoderVa\
-    lues\x18\x16\x20\x01(\x0b2#.linkbot.robot.getEncoderValues.OutH\0R\x10ge\
-    tEncoderValues\x12K\n\x0egetJointStates\x18\x17\x20\x01(\x0b2!.linkbot.r\
-    obot.getJointStates.OutH\0R\x0egetJointStates\x12i\n\x18enableAccelerome\
-    terEvent\x18\x18\x20\x01(\x0b2+.linkbot.robot.enableAccelerometerEvent.O\
-    utH\0R\x18enableAccelerometerEvent\x12T\n\x11enableButtonEvent\x18\x19\
-    \x20\x01(\x0b2$.linkbot.robot.enableButtonEvent.OutH\0R\x11enableButtonE\
-    vent\x12W\n\x12enableEncoderEvent\x18\x1a\x20\x01(\x0b2%.linkbot.robot.e\
-    nableEncoderEvent.OutH\0R\x12enableEncoderEvent\x12Q\n\x10enableJointEve\
-    nt\x18\x1b\x20\x01(\x0b2#.linkbot.robot.enableJointEvent.OutH\0R\x10enab\
-    leJointEvent\x12W\n\x12getBuzzerFrequency\x18\x02\x20\x01(\x0b2%.linkbot\
-    .robot.getBuzzerFrequency.OutH\0R\x12getBuzzerFrequency\x12B\n\x0bgetLed\
-    Color\x18\x03\x20\x01(\x0b2\x1e.linkbot.robot.getLedColor.OutH\0R\x0bget\
-    LedColor\x12f\n\x17getMotorControllerOmega\x18\x1c\x20\x01(\x0b2*.linkbo\
-    t.robot.getMotorControllerOmega.OutH\0R\x17getMotorControllerOmega\x12i\
-    \n\x18getMotorControllerAlphaI\x18\x1d\x20\x01(\x0b2+.linkbot.robot.getM\
-    otorControllerAlphaI.OutH\0R\x18getMotorControllerAlphaI\x12i\n\x18getMo\
-    torControllerAlphaF\x18\x1e\x20\x01(\x0b2+.linkbot.robot.getMotorControl\
-    lerAlphaF.OutH\0R\x18getMotorControllerAlphaF\x12\x87\x01\n\"getMotorCon\
-    trollerProportionalGain\x18\x1f\x20\x01(\x0b25.linkbot.robot.getMotorCon\
-    trollerProportionalGain.OutH\0R\"getMotorControllerProportionalGain\x12\
-    \x81\x01\n\x20getMotorControllerIntegratorGain\x18\x20\x20\x01(\x0b23.li\
-    nkbot.robot.getMotorControllerIntegratorGain.OutH\0R\x20getMotorControll\
-    erIntegratorGain\x12\x81\x01\n\x20getMotorControllerDerivativeGain\x18!\
-    \x20\x01(\x0b23.linkbot.robot.getMotorControllerDerivativeGain.OutH\0R\
-    \x20getMotorControllerDerivativeGain\x12\x84\x01\n!getMotorControllerSaf\
-    etyThreshold\x18\"\x20\x01(\x0b24.linkbot.robot.getMotorControllerSafety\
-    Threshold.OutH\0R!getMotorControllerSafetyThreshold\x12x\n\x1dgetMotorCo\
-    ntrollerSafetyAngle\x18#\x20\x01(\x0b20.linkbot.robot.getMotorController\
-    SafetyAngle.OutH\0R\x1dgetMotorControllerSafetyAngle\x12W\n\x12setBuzzer\
-    Frequency\x18\x04\x20\x01(\x0b2%.linkbot.robot.setBuzzerFrequency.OutH\0\
-    R\x12setBuzzerFrequency\x12B\n\x0bsetLedColor\x18\x05\x20\x01(\x0b2\x1e.\
-    linkbot.robot.setLedColor.OutH\0R\x0bsetLedColor\x12f\n\x17setMotorContr\
-    ollerOmega\x18$\x20\x01(\x0b2*.linkbot.robot.setMotorControllerOmega.Out\
-    H\0R\x17setMotorControllerOmega\x12i\n\x18setMotorControllerAlphaI\x18%\
-    \x20\x01(\x0b2+.linkbot.robot.setMotorControllerAlphaI.OutH\0R\x18setMot\
-    orControllerAlphaI\x12i\n\x18setMotorControllerAlphaF\x18&\x20\x01(\x0b2\
-    +.linkbot.robot.setMotorControllerAlphaF.OutH\0R\x18setMotorControllerAl\
-    phaF\x12\x87\x01\n\"setMotorControllerProportionalGain\x18'\x20\x01(\x0b\
-    25.linkbot.robot.setMotorControllerProportionalGain.OutH\0R\"setMotorCon\
-    trollerProportionalGain\x12\x81\x01\n\x20setMotorControllerIntegratorGai\
-    n\x18(\x20\x01(\x0b23.linkbot.robot.setMotorControllerIntegratorGain.Out\
-    H\0R\x20setMotorControllerIntegratorGain\x12\x81\x01\n\x20setMotorContro\
-    llerDerivativeGain\x18)\x20\x01(\x0b23.linkbot.robot.setMotorControllerD\
-    erivativeGain.OutH\0R\x20setMotorControllerDerivativeGain\x12\x84\x01\n!\
-    setMotorControllerSafetyThreshold\x18*\x20\x01(\x0b24.linkbot.robot.setM\
-    otorControllerSafetyThreshold.OutH\0R!setMotorControllerSafetyThreshold\
-    \x12x\n\x1dsetMotorControllerSafetyAngle\x18+\x20\x01(\x0b20.linkbot.rob\
-    ot.setMotorControllerSafetyAngle.OutH\0R\x1dsetMotorControllerSafetyAngl\
-    e\x12]\n\x14setResetOnDisconnect\x185\x20\x01(\x0b2'.linkbot.robot.setRe\
-    setOnDisconnect.OutH\0R\x14setResetOnDisconnect\x12Q\n\x10resetEncoderRe\
-    vs\x18,\x20\x01(\x0b2#.linkbot.robot.resetEncoderRevs.OutH\0R\x10resetEn\
-    coderRevs\x12<\n\trobotMove\x18-\x20\x01(\x0b2\x1c.linkbot.robot.robotMo\
-    ve.OutH\0R\trobotMove\x12-\n\x04stop\x18.\x20\x01(\x0b2\x17.linkbot.robo\
-    t.stop.OutH\0R\x04stop\x123\n\x06reboot\x18/\x20\x01(\x0b2\x19.linkbot.r\
-    obot.reboot.OutH\0R\x06reboot\x12B\n\x0bwriteEeprom\x180\x20\x01(\x0b2\
-    \x1e.linkbot.robot.writeEeprom.OutH\0R\x0bwriteEeprom\x12?\n\nreadEeprom\
-    \x181\x20\x01(\x0b2\x1d.linkbot.robot.readEeprom.OutH\0R\nreadEeprom\x12\
-    9\n\x08writeTwi\x182\x20\x01(\x0b2\x1b.linkbot.robot.writeTwi.OutH\0R\
-    \x08writeTwi\x126\n\x07readTwi\x183\x20\x01(\x0b2\x1a.linkbot.robot.read\
-    Twi.OutH\0R\x07readTwi\x12E\n\x0cwriteReadTwi\x184\x20\x01(\x0b2\x1f.lin\
-    kbot.robot.writeReadTwi.OutH\0R\x0cwriteReadTwiB\x05\n\x03arg\"\x8c\x01\
-    \n\x0bButtonEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\
-    \x12-\n\x06button\x18\x02\x20\x01(\x0e2\x15.linkbot.robot.ButtonR\x06but\
-    ton\x120\n\x05state\x18\x03\x20\x01(\x0e2\x1a.linkbot.robot.ButtonStateR\
-    \x05state\"a\n\x0cEncoderEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\
-    \ttimestamp\x12\x12\n\x04mask\x18\x02\x20\x01(\rR\x04mask\x12\x1f\n\x06v\
-    alues\x18\x03\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x04\"\\\
-    \n\x12AccelerometerEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimes\
-    tamp\x12\x0c\n\x01x\x18\x02\x20\x01(\x02R\x01x\x12\x0c\n\x01y\x18\x03\
-    \x20\x01(\x02R\x01y\x12\x0c\n\x01z\x18\x04\x20\x01(\x02R\x01z\"\x87\x01\
-    \n\nJointEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\x12\
-    \x14\n\x05joint\x18\x02\x20\x01(\rR\x05joint\x12/\n\x05event\x18\x03\x20\
-    \x01(\x0e2\x19.linkbot.robot.JointStateR\x05event\x12\x14\n\x05angle\x18\
-    \x04\x20\x01(\x02R\x05angle\"Y\n\x11DebugMessageEvent\x12\x1c\n\ttimesta\
-    mp\x18\x01\x20\x01(\rR\ttimestamp\x12&\n\nbytestring\x18\x02\x20\x01(\tR\
-    \nbytestringB\x06\x92?\x03\x08\x80\x01\",\n\x0cConnectEvent\x12\x1c\n\tt\
-    imestamp\x18\x01\x20\x01(\rR\ttimestamp\"/\n\x0fDisconnectEvent\x12\x1c\
-    \n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\"D\n\x10ResetPeripherals\
-    \x120\n\x13peripheralResetMask\x18\x02\x20\x01(\rR\x13peripheralResetMas\
-    k\"S\n\rClientToRobot\x12;\n\nrpcRequest\x18\x01\x20\x01(\x0b2\x19.linkb\
-    ot.robot.RpcRequestH\0R\nrpcRequestB\x05\n\x03arg\"n\n\x16ClientToRobotB\
-    roadcast\x12M\n\x10resetPeripherals\x18\x01\x20\x01(\x0b2\x1f.linkbot.ro\
-    bot.ResetPeripheralsH\0R\x10resetPeripheralsB\x05\n\x03arg\"\xc3\x04\n\r\
-    RobotToClient\x125\n\x08rpcReply\x18\x01\x20\x01(\x0b2\x17.linkbot.robot\
-    .RpcReplyH\0R\x08rpcReply\x12S\n\x12accelerometerEvent\x18\x02\x20\x01(\
-    \x0b2!.linkbot.robot.AccelerometerEventH\0R\x12accelerometerEvent\x12>\n\
-    \x0bbuttonEvent\x18\x03\x20\x01(\x0b2\x1a.linkbot.robot.ButtonEventH\0R\
-    \x0bbuttonEvent\x12A\n\x0cencoderEvent\x18\x04\x20\x01(\x0b2\x1b.linkbot\
-    .robot.EncoderEventH\0R\x0cencoderEvent\x12;\n\njointEvent\x18\x05\x20\
-    \x01(\x0b2\x19.linkbot.robot.JointEventH\0R\njointEvent\x12P\n\x11debugM\
-    essageEvent\x18\x06\x20\x01(\x0b2\x20.linkbot.robot.DebugMessageEventH\0\
-    R\x11debugMessageEvent\x12A\n\x0cconnectEvent\x18\x07\x20\x01(\x0b2\x1b.\
-    linkbot.robot.ConnectEventH\0R\x0cconnectEvent\x12J\n\x0fdisconnectEvent\
-    \x18\x08\x20\x01(\x0b2\x1e.linkbot.robot.DisconnectEventH\0R\x0fdisconne\
-    ctEventB\x05\n\x03arg*-\n\nFormFactor\x12\x05\n\x01I\x10\0\x12\x05\n\x01\
-    L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06DONGLE\x10\x03*8\n\nJointSta\
-    te\x12\t\n\x05COAST\x10\0\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\
-    \x10\x02\x12\t\n\x05ERROR\x10\x04*!\n\x06Button\x12\t\n\x05POWER\x10\0\
-    \x12\x05\n\x01A\x10\x01\x12\x05\n\x01B\x10\x02*\x1f\n\x0bButtonState\x12\
-    \x06\n\x02UP\x10\0\x12\x08\n\x04DOWN\x10\x01*E\n\nPeripheral\x12\n\n\x06\
-    MOTOR1\x10\0\x12\n\n\x06MOTOR2\x10\x01\x12\n\n\x06MOTOR3\x10\x02\x12\x07\
-    \n\x03LED\x10\x03\x12\n\n\x06BUZZER\x10\x04\
+    \x03Out\"\\\n\x18setMotorControllerAlphaI\x1a9\n\x02In\x12\x12\n\x04mask\
+    \x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\
+    \x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"\\\n\x18setMo\
+    torControllerAlphaF\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\
+    \x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\
+    \x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"f\n\"setMotorControllerProportio\
+    nalGain\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\
+    \x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\
+    \x10\x20\x1a\x05\n\x03Out\"d\n\x20setMotorControllerIntegratorGain\x1a9\
+    \n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06valu\
+    es\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\
+    \n\x03Out\"d\n\x20setMotorControllerDerivativeGain\x1a9\n\x02In\x12\x12\
+    \n\x04mask\x18\x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\
+    \x03(\x02R\x06valuesB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"e\n\
+    !setMotorControllerSafetyThreshold\x1a9\n\x02In\x12\x12\n\x04mask\x18\
+    \x01\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x02\x20\x03(\rR\x06valu\
+    esB\x07\x10\x01\x92?\x02\x10\x20\x1a\x05\n\x03Out\"a\n\x1dsetMotorContro\
+    llerSafetyAngle\x1a9\n\x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04ma\
+    sk\x12\x1f\n\x06values\x18\x02\x20\x03(\x02R\x06valuesB\x07\x10\x01\x92?\
+    \x02\x10\x20\x1a\x05\n\x03Out\"i\n\x14setResetOnDisconnect\x1aJ\n\x02In\
+    \x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x120\n\x13peripheralReset\
+    Mask\x18\x02\x20\x01(\rR\x13peripheralResetMask\x1a\x05\n\x03Out\"\x1f\n\
+    \x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x05\n\x03Out\"7\n\x12setBuzzerF\
+    requency\x1a\x1a\n\x02In\x12\x14\n\x05value\x18\x01\x20\x01(\x02R\x05val\
+    ue\x1a\x05\n\x03Out\"0\n\x0bsetLedColor\x1a\x1a\n\x02In\x12\x14\n\x05val\
+    ue\x18\x01\x20\x01(\rR\x05value\x1a\x05\n\x03Out\"'\n\x04stop\x1a\x18\n\
+    \x02In\x12\x12\n\x04mask\x18\x01\x20\x01(\rR\x04mask\x1a\x05\n\x03Out\"\
+    \xee\x02\n\x04Goal\x12,\n\x04type\x18\x01\x20\x01(\x0e2\x18.linkbot.robo\
+    t.Goal.TypeR\x04type\x12\x12\n\x04goal\x18\x02\x20\x01(\x02R\x04goal\x12\
+    >\n\ncontroller\x18\x03\x20\x01(\x0e2\x1e.linkbot.robot.Goal.ControllerR\
+    \ncontroller\x12\x18\n\x07timeout\x18\x04\x20\x01(\x02R\x07timeout\x12?\
+    \n\rmodeOnTimeout\x18\x05\x20\x01(\x0e2\x19.linkbot.robot.JointStateR\rm\
+    odeOnTimeout\"0\n\x04Type\x12\x0c\n\x08ABSOLUTE\x10\x01\x12\x0c\n\x08REL\
+    ATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\
+    \x03PID\x10\x01\x12\x0c\n\x08CONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\
+    \x12\t\n\x05ACCEL\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMON\
+    IC\x10\x06\"\xc8\x01\n\trobotMove\x1a\xb3\x01\n\x02In\x127\n\x0cmotorOne\
+    Goal\x18\x01\x20\x01(\x0b2\x13.linkbot.robot.GoalR\x0cmotorOneGoal\x127\
+    \n\x0cmotorTwoGoal\x18\x02\x20\x01(\x0b2\x13.linkbot.robot.GoalR\x0cmoto\
+    rTwoGoal\x12;\n\x0emotorThreeGoal\x18\x03\x20\x01(\x0b2\x13.linkbot.robo\
+    t.GoalR\x0emotorThreeGoal\x1a\x05\n\x03Out\"a\n\x18enableAccelerometerEv\
+    ent\x1a>\n\x02In\x12\x16\n\x06enable\x18\x01\x20\x01(\x08R\x06enable\x12\
+    \x20\n\x0bgranularity\x18\x02\x20\x01(\x02R\x0bgranularity\x1a\x05\n\x03\
+    Out\"8\n\x11enableButtonEvent\x1a\x1c\n\x02In\x12\x16\n\x06enable\x18\
+    \x01\x20\x01(\x08R\x06enable\x1a\x05\n\x03Out\"\xe5\x02\n\x12enableEncod\
+    erEvent\x1a\xc7\x02\n\x02In\x12P\n\nencoderOne\x18\x01\x20\x01(\x0b20.li\
+    nkbot.robot.enableEncoderEvent.In.SignalStateR\nencoderOne\x12P\n\nencod\
+    erTwo\x18\x02\x20\x01(\x0b20.linkbot.robot.enableEncoderEvent.In.SignalS\
+    tateR\nencoderTwo\x12T\n\x0cencoderThree\x18\x03\x20\x01(\x0b20.linkbot.\
+    robot.enableEncoderEvent.In.SignalStateR\x0cencoderThree\x1aG\n\x0bSigna\
+    lState\x12\x16\n\x06enable\x18\x01\x20\x01(\x08R\x06enable\x12\x20\n\x0b\
+    granularity\x18\x02\x20\x01(\x02R\x0bgranularity\x1a\x05\n\x03Out\"7\n\
+    \x10enableJointEvent\x1a\x1c\n\x02In\x12\x16\n\x06enable\x18\x01\x20\x01\
+    (\x08R\x06enable\x1a\x05\n\x03Out\"P\n\x0bwriteEeprom\x1a:\n\x02In\x12\
+    \x18\n\x07address\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\x04data\x18\
+    \x02\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"c\
+    \n\nreadEeprom\x1a2\n\x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\x07\
+    address\x12\x12\n\x04size\x18\x02\x20\x01(\rR\x04size\x1a!\n\x03Out\x12\
+    \x1a\n\x04data\x18\x01\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\"\
+    M\n\x08writeTwi\x1a:\n\x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\
+    \x07address\x12\x1a\n\x04data\x18\x02\x20\x01(\x0cR\x04dataB\x06\x92?\
+    \x03\x08\x80\x01\x1a\x05\n\x03Out\"h\n\x07readTwi\x1a:\n\x02In\x12\x18\n\
+    \x07address\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\x08recvsize\x18\x02\
+    \x20\x01(\rR\x08recvsize\x1a!\n\x03Out\x12\x1a\n\x04data\x18\x02\x20\x01\
+    (\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\"\x89\x01\n\x0cwriteReadTwi\x1a\
+    V\n\x02In\x12\x18\n\x07address\x18\x01\x20\x01(\rR\x07address\x12\x1a\n\
+    \x08recvsize\x18\x02\x20\x01(\rR\x08recvsize\x12\x1a\n\x04data\x18\x03\
+    \x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\x1a!\n\x03Out\x12\x1a\n\
+    \x04data\x18\x02\x20\x01(\x0cR\x04dataB\x06\x92?\x03\x08\x80\x01\"\x15\n\
+    \x06reboot\x1a\x04\n\x02In\x1a\x05\n\x03Out\"Q\n\x0cgetBCRemotes\x1a\x04\
+    \n\x02In\x1a;\n\x03Out\x124\n\x08serialId\x18\x01\x20\x03(\x0b2\x11.link\
+    bot.SerialIdR\x08serialIdB\x05\x92?\x02\x10\x08\"I\n\x0bgetBCMaster\x1a\
+    \x04\n\x02In\x1a4\n\x03Out\x12-\n\x08serialId\x18\x01\x20\x01(\x0b2\x11.\
+    linkbot.SerialIdR\x08serialId\"\x88\x01\n\ngetBCPoses\x1a\x04\n\x02In\
+    \x1at\n\x03Out\x12C\n\x06angles\x18\x01\x20\x03(\x0b2$.linkbot.robot.get\
+    BCPoses.Out.AnglesR\x06anglesB\x05\x92?\x02\x10\x20\x1a(\n\x06Angles\x12\
+    \x0e\n\x02a1\x18\x01\x20\x02(\x02R\x02a1\x12\x0e\n\x02a2\x18\x02\x20\x02\
+    (\x02R\x02a2\"\xc1\x20\n\nRpcRequest\x12\x1c\n\trequestId\x18\x01\x20\
+    \x01(\rR\trequestId\x12h\n\x18getFirmwareVersionString\x18\x10\x20\x01(\
+    \x0b2*.linkbot.robot.getFirmwareVersionString.InH\0R\x18getFirmwareVersi\
+    onString\x12G\n\rgetFormFactor\x18\x11\x20\x01(\x0b2\x1f.linkbot.robot.g\
+    etFormFactor.InH\0R\rgetFormFactor\x12;\n\tgetAdcRaw\x18\x12\x20\x01(\
+    \x0b2\x1b.linkbot.robot.getAdcRaw.InH\0R\tgetAdcRaw\x12S\n\x11getBattery\
+    Voltage\x18\x13\x20\x01(\x0b2#.linkbot.robot.getBatteryVoltage.InH\0R\
+    \x11getBatteryVoltage\x12\\\n\x14getAccelerometerData\x18\x14\x20\x01(\
+    \x0b2&.linkbot.robot.getAccelerometerData.InH\0R\x14getAccelerometerData\
+    \x12J\n\x0egetButtonState\x18\x15\x20\x01(\x0b2\x20.linkbot.robot.getBut\
+    tonState.InH\0R\x0egetButtonState\x12P\n\x10getEncoderValues\x18\x16\x20\
+    \x01(\x0b2\".linkbot.robot.getEncoderValues.InH\0R\x10getEncoderValues\
+    \x12J\n\x0egetJointStates\x18\x17\x20\x01(\x0b2\x20.linkbot.robot.getJoi\
+    ntStates.InH\0R\x0egetJointStates\x12h\n\x18enableAccelerometerEvent\x18\
+    \x18\x20\x01(\x0b2*.linkbot.robot.enableAccelerometerEvent.InH\0R\x18ena\
+    bleAccelerometerEvent\x12S\n\x11enableButtonEvent\x18\x19\x20\x01(\x0b2#\
+    .linkbot.robot.enableButtonEvent.InH\0R\x11enableButtonEvent\x12V\n\x12e\
+    nableEncoderEvent\x18\x1a\x20\x01(\x0b2$.linkbot.robot.enableEncoderEven\
+    t.InH\0R\x12enableEncoderEvent\x12P\n\x10enableJointEvent\x18\x1b\x20\
+    \x01(\x0b2\".linkbot.robot.enableJointEvent.InH\0R\x10enableJointEvent\
+    \x12V\n\x12getBuzzerFrequency\x18\x02\x20\x01(\x0b2$.linkbot.robot.getBu\
+    zzerFrequency.InH\0R\x12getBuzzerFrequency\x12A\n\x0bgetLedColor\x18\x03\
+    \x20\x01(\x0b2\x1d.linkbot.robot.getLedColor.InH\0R\x0bgetLedColor\x12e\
+    \n\x17getMotorControllerOmega\x18\x1c\x20\x01(\x0b2).linkbot.robot.getMo\
+    torControllerOmega.InH\0R\x17getMotorControllerOmega\x12h\n\x18getMotorC\
+    ontrollerAlphaI\x18\x1d\x20\x01(\x0b2*.linkbot.robot.getMotorControllerA\
+    lphaI.InH\0R\x18getMotorControllerAlphaI\x12h\n\x18getMotorControllerAlp\
+    haF\x18\x1e\x20\x01(\x0b2*.linkbot.robot.getMotorControllerAlphaF.InH\0R\
+    \x18getMotorControllerAlphaF\x12\x86\x01\n\"getMotorControllerProportion\
+    alGain\x18\x1f\x20\x01(\x0b24.linkbot.robot.getMotorControllerProportion\
+    alGain.InH\0R\"getMotorControllerProportionalGain\x12\x80\x01\n\x20getMo\
+    torControllerIntegratorGain\x18\x20\x20\x01(\x0b22.linkbot.robot.getMoto\
+    rControllerIntegratorGain.InH\0R\x20getMotorControllerIntegratorGain\x12\
+    \x80\x01\n\x20getMotorControllerDerivativeGain\x18!\x20\x01(\x0b22.linkb\
+    ot.robot.getMotorControllerDerivativeGain.InH\0R\x20getMotorControllerDe\
+    rivativeGain\x12\x83\x01\n!getMotorControllerSafetyThreshold\x18\"\x20\
+    \x01(\x0b23.linkbot.robot.getMotorControllerSafetyThreshold.InH\0R!getMo\
+    torControllerSafetyThreshold\x12w\n\x1dgetMotorControllerSafetyAngle\x18\
+    #\x20\x01(\x0b2/.linkbot.robot.getMotorControllerSafetyAngle.InH\0R\x1dg\
+    etMotorControllerSafetyAngle\x12V\n\x12setBuzzerFrequency\x18\x04\x20\
+    \x01(\x0b2$.linkbot.robot.setBuzzerFrequency.InH\0R\x12setBuzzerFrequenc\
+    y\x12A\n\x0bsetLedColor\x18\x05\x20\x01(\x0b2\x1d.linkbot.robot.setLedCo\
+    lor.InH\0R\x0bsetLedColor\x12e\n\x17setMotorControllerOmega\x18$\x20\x01\
+    (\x0b2).linkbot.robot.setMotorControllerOmega.InH\0R\x17setMotorControll\
+    erOmega\x12h\n\x18setMotorControllerAlphaI\x18%\x20\x01(\x0b2*.linkbot.r\
+    obot.setMotorControllerAlphaI.InH\0R\x18setMotorControllerAlphaI\x12h\n\
+    \x18setMotorControllerAlphaF\x18&\x20\x01(\x0b2*.linkbot.robot.setMotorC\
+    ontrollerAlphaF.InH\0R\x18setMotorControllerAlphaF\x12\x86\x01\n\"setMot\
+    orControllerProportionalGain\x18'\x20\x01(\x0b24.linkbot.robot.setMotorC\
+    ontrollerProportionalGain.InH\0R\"setMotorControllerProportionalGain\x12\
+    \x80\x01\n\x20setMotorControllerIntegratorGain\x18(\x20\x01(\x0b22.linkb\
+    ot.robot.setMotorControllerIntegratorGain.InH\0R\x20setMotorControllerIn\
+    tegratorGain\x12\x80\x01\n\x20setMotorControllerDerivativeGain\x18)\x20\
+    \x01(\x0b22.linkbot.robot.setMotorControllerDerivativeGain.InH\0R\x20set\
+    MotorControllerDerivativeGain\x12\x83\x01\n!setMotorControllerSafetyThre\
+    shold\x18*\x20\x01(\x0b23.linkbot.robot.setMotorControllerSafetyThreshol\
+    d.InH\0R!setMotorControllerSafetyThreshold\x12w\n\x1dsetMotorControllerS\
+    afetyAngle\x18+\x20\x01(\x0b2/.linkbot.robot.setMotorControllerSafetyAng\
+    le.InH\0R\x1dsetMotorControllerSafetyAngle\x12\\\n\x14setResetOnDisconne\
+    ct\x185\x20\x01(\x0b2&.linkbot.robot.setResetOnDisconnect.InH\0R\x14setR\
+    esetOnDisconnect\x12P\n\x10resetEncoderRevs\x18,\x20\x01(\x0b2\".linkbot\
+    .robot.resetEncoderRevs.InH\0R\x10resetEncoderRevs\x12;\n\trobotMove\x18\
+    -\x20\x01(\x0b2\x1b.linkbot.robot.robotMove.InH\0R\trobotMove\x12,\n\x04\
+    stop\x18.\x20\x01(\x0b2\x16.linkbot.robot.stop.InH\0R\x04stop\x122\n\x06\
+    reboot\x18/\x20\x01(\x0b2\x18.linkbot.robot.reboot.InH\0R\x06reboot\x12A\
+    \n\x0bwriteEeprom\x180\x20\x01(\x0b2\x1d.linkbot.robot.writeEeprom.InH\0\
+    R\x0bwriteEeprom\x12>\n\nreadEeprom\x181\x20\x01(\x0b2\x1c.linkbot.robot\
+    .readEeprom.InH\0R\nreadEeprom\x128\n\x08writeTwi\x182\x20\x01(\x0b2\x1a\
+    .linkbot.robot.writeTwi.InH\0R\x08writeTwi\x125\n\x07readTwi\x183\x20\
+    \x01(\x0b2\x19.linkbot.robot.readTwi.InH\0R\x07readTwi\x12D\n\x0cwriteRe\
+    adTwi\x184\x20\x01(\x0b2\x1e.linkbot.robot.writeReadTwi.InH\0R\x0cwriteR\
+    eadTwi\x12D\n\x0cgetBCRemotes\x186\x20\x01(\x0b2\x1e.linkbot.robot.getBC\
+    Remotes.InH\0R\x0cgetBCRemotes\x12A\n\x0bgetBCMaster\x187\x20\x01(\x0b2\
+    \x1d.linkbot.robot.getBCMaster.InH\0R\x0bgetBCMaster\x12>\n\ngetBCPoses\
+    \x188\x20\x01(\x0b2\x1c.linkbot.robot.getBCPoses.InH\0R\ngetBCPosesB\x05\
+    \n\x03arg\"\xec\x20\n\x08RpcReply\x12\x1c\n\trequestId\x18\x01\x20\x01(\
+    \rR\trequestId\x12i\n\x18getFirmwareVersionString\x18\x10\x20\x01(\x0b2+\
+    .linkbot.robot.getFirmwareVersionString.OutH\0R\x18getFirmwareVersionStr\
+    ing\x12H\n\rgetFormFactor\x18\x11\x20\x01(\x0b2\x20.linkbot.robot.getFor\
+    mFactor.OutH\0R\rgetFormFactor\x12<\n\tgetAdcRaw\x18\x12\x20\x01(\x0b2\
+    \x1c.linkbot.robot.getAdcRaw.OutH\0R\tgetAdcRaw\x12T\n\x11getBatteryVolt\
+    age\x18\x13\x20\x01(\x0b2$.linkbot.robot.getBatteryVoltage.OutH\0R\x11ge\
+    tBatteryVoltage\x12]\n\x14getAccelerometerData\x18\x14\x20\x01(\x0b2'.li\
+    nkbot.robot.getAccelerometerData.OutH\0R\x14getAccelerometerData\x12K\n\
+    \x0egetButtonState\x18\x15\x20\x01(\x0b2!.linkbot.robot.getButtonState.O\
+    utH\0R\x0egetButtonState\x12Q\n\x10getEncoderValues\x18\x16\x20\x01(\x0b\
+    2#.linkbot.robot.getEncoderValues.OutH\0R\x10getEncoderValues\x12K\n\x0e\
+    getJointStates\x18\x17\x20\x01(\x0b2!.linkbot.robot.getJointStates.OutH\
+    \0R\x0egetJointStates\x12i\n\x18enableAccelerometerEvent\x18\x18\x20\x01\
+    (\x0b2+.linkbot.robot.enableAccelerometerEvent.OutH\0R\x18enableAccelero\
+    meterEvent\x12T\n\x11enableButtonEvent\x18\x19\x20\x01(\x0b2$.linkbot.ro\
+    bot.enableButtonEvent.OutH\0R\x11enableButtonEvent\x12W\n\x12enableEncod\
+    erEvent\x18\x1a\x20\x01(\x0b2%.linkbot.robot.enableEncoderEvent.OutH\0R\
+    \x12enableEncoderEvent\x12Q\n\x10enableJointEvent\x18\x1b\x20\x01(\x0b2#\
+    .linkbot.robot.enableJointEvent.OutH\0R\x10enableJointEvent\x12W\n\x12ge\
+    tBuzzerFrequency\x18\x02\x20\x01(\x0b2%.linkbot.robot.getBuzzerFrequency\
+    .OutH\0R\x12getBuzzerFrequency\x12B\n\x0bgetLedColor\x18\x03\x20\x01(\
+    \x0b2\x1e.linkbot.robot.getLedColor.OutH\0R\x0bgetLedColor\x12f\n\x17get\
+    MotorControllerOmega\x18\x1c\x20\x01(\x0b2*.linkbot.robot.getMotorContro\
+    llerOmega.OutH\0R\x17getMotorControllerOmega\x12i\n\x18getMotorControlle\
+    rAlphaI\x18\x1d\x20\x01(\x0b2+.linkbot.robot.getMotorControllerAlphaI.Ou\
+    tH\0R\x18getMotorControllerAlphaI\x12i\n\x18getMotorControllerAlphaF\x18\
+    \x1e\x20\x01(\x0b2+.linkbot.robot.getMotorControllerAlphaF.OutH\0R\x18ge\
+    tMotorControllerAlphaF\x12\x87\x01\n\"getMotorControllerProportionalGain\
+    \x18\x1f\x20\x01(\x0b25.linkbot.robot.getMotorControllerProportionalGain\
+    .OutH\0R\"getMotorControllerProportionalGain\x12\x81\x01\n\x20getMotorCo\
+    ntrollerIntegratorGain\x18\x20\x20\x01(\x0b23.linkbot.robot.getMotorCont\
+    rollerIntegratorGain.OutH\0R\x20getMotorControllerIntegratorGain\x12\x81\
+    \x01\n\x20getMotorControllerDerivativeGain\x18!\x20\x01(\x0b23.linkbot.r\
+    obot.getMotorControllerDerivativeGain.OutH\0R\x20getMotorControllerDeriv\
+    ativeGain\x12\x84\x01\n!getMotorControllerSafetyThreshold\x18\"\x20\x01(\
+    \x0b24.linkbot.robot.getMotorControllerSafetyThreshold.OutH\0R!getMotorC\
+    ontrollerSafetyThreshold\x12x\n\x1dgetMotorControllerSafetyAngle\x18#\
+    \x20\x01(\x0b20.linkbot.robot.getMotorControllerSafetyAngle.OutH\0R\x1dg\
+    etMotorControllerSafetyAngle\x12W\n\x12setBuzzerFrequency\x18\x04\x20\
+    \x01(\x0b2%.linkbot.robot.setBuzzerFrequency.OutH\0R\x12setBuzzerFrequen\
+    cy\x12B\n\x0bsetLedColor\x18\x05\x20\x01(\x0b2\x1e.linkbot.robot.setLedC\
+    olor.OutH\0R\x0bsetLedColor\x12f\n\x17setMotorControllerOmega\x18$\x20\
+    \x01(\x0b2*.linkbot.robot.setMotorControllerOmega.OutH\0R\x17setMotorCon\
+    trollerOmega\x12i\n\x18setMotorControllerAlphaI\x18%\x20\x01(\x0b2+.link\
+    bot.robot.setMotorControllerAlphaI.OutH\0R\x18setMotorControllerAlphaI\
+    \x12i\n\x18setMotorControllerAlphaF\x18&\x20\x01(\x0b2+.linkbot.robot.se\
+    tMotorControllerAlphaF.OutH\0R\x18setMotorControllerAlphaF\x12\x87\x01\n\
+    \"setMotorControllerProportionalGain\x18'\x20\x01(\x0b25.linkbot.robot.s\
+    etMotorControllerProportionalGain.OutH\0R\"setMotorControllerProportiona\
+    lGain\x12\x81\x01\n\x20setMotorControllerIntegratorGain\x18(\x20\x01(\
+    \x0b23.linkbot.robot.setMotorControllerIntegratorGain.OutH\0R\x20setMoto\
+    rControllerIntegratorGain\x12\x81\x01\n\x20setMotorControllerDerivativeG\
+    ain\x18)\x20\x01(\x0b23.linkbot.robot.setMotorControllerDerivativeGain.O\
+    utH\0R\x20setMotorControllerDerivativeGain\x12\x84\x01\n!setMotorControl\
+    lerSafetyThreshold\x18*\x20\x01(\x0b24.linkbot.robot.setMotorControllerS\
+    afetyThreshold.OutH\0R!setMotorControllerSafetyThreshold\x12x\n\x1dsetMo\
+    torControllerSafetyAngle\x18+\x20\x01(\x0b20.linkbot.robot.setMotorContr\
+    ollerSafetyAngle.OutH\0R\x1dsetMotorControllerSafetyAngle\x12]\n\x14setR\
+    esetOnDisconnect\x185\x20\x01(\x0b2'.linkbot.robot.setResetOnDisconnect.\
+    OutH\0R\x14setResetOnDisconnect\x12Q\n\x10resetEncoderRevs\x18,\x20\x01(\
+    \x0b2#.linkbot.robot.resetEncoderRevs.OutH\0R\x10resetEncoderRevs\x12<\n\
+    \trobotMove\x18-\x20\x01(\x0b2\x1c.linkbot.robot.robotMove.OutH\0R\trobo\
+    tMove\x12-\n\x04stop\x18.\x20\x01(\x0b2\x17.linkbot.robot.stop.OutH\0R\
+    \x04stop\x123\n\x06reboot\x18/\x20\x01(\x0b2\x19.linkbot.robot.reboot.Ou\
+    tH\0R\x06reboot\x12B\n\x0bwriteEeprom\x180\x20\x01(\x0b2\x1e.linkbot.rob\
+    ot.writeEeprom.OutH\0R\x0bwriteEeprom\x12?\n\nreadEeprom\x181\x20\x01(\
+    \x0b2\x1d.linkbot.robot.readEeprom.OutH\0R\nreadEeprom\x129\n\x08writeTw\
+    i\x182\x20\x01(\x0b2\x1b.linkbot.robot.writeTwi.OutH\0R\x08writeTwi\x126\
+    \n\x07readTwi\x183\x20\x01(\x0b2\x1a.linkbot.robot.readTwi.OutH\0R\x07re\
+    adTwi\x12E\n\x0cwriteReadTwi\x184\x20\x01(\x0b2\x1f.linkbot.robot.writeR\
+    eadTwi.OutH\0R\x0cwriteReadTwi\x12E\n\x0cgetBCRemotes\x186\x20\x01(\x0b2\
+    \x1f.linkbot.robot.getBCRemotes.OutH\0R\x0cgetBCRemotes\x12B\n\x0bgetBCM\
+    aster\x187\x20\x01(\x0b2\x1e.linkbot.robot.getBCMaster.OutH\0R\x0bgetBCM\
+    aster\x12?\n\ngetBCPoses\x188\x20\x01(\x0b2\x1d.linkbot.robot.getBCPoses\
+    .OutH\0R\ngetBCPosesB\x05\n\x03arg\"\x8c\x01\n\x0bButtonEvent\x12\x1c\n\
+    \ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\x12-\n\x06button\x18\x02\x20\
+    \x01(\x0e2\x15.linkbot.robot.ButtonR\x06button\x120\n\x05state\x18\x03\
+    \x20\x01(\x0e2\x1a.linkbot.robot.ButtonStateR\x05state\"a\n\x0cEncoderEv\
+    ent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\x12\x12\n\x04mas\
+    k\x18\x02\x20\x01(\rR\x04mask\x12\x1f\n\x06values\x18\x03\x20\x03(\x02R\
+    \x06valuesB\x07\x10\x01\x92?\x02\x10\x04\"\\\n\x12AccelerometerEvent\x12\
+    \x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestamp\x12\x0c\n\x01x\x18\x02\
+    \x20\x01(\x02R\x01x\x12\x0c\n\x01y\x18\x03\x20\x01(\x02R\x01y\x12\x0c\n\
+    \x01z\x18\x04\x20\x01(\x02R\x01z\"\x87\x01\n\nJointEvent\x12\x1c\n\ttime\
+    stamp\x18\x01\x20\x01(\rR\ttimestamp\x12\x14\n\x05joint\x18\x02\x20\x01(\
+    \rR\x05joint\x12/\n\x05event\x18\x03\x20\x01(\x0e2\x19.linkbot.robot.Joi\
+    ntStateR\x05event\x12\x14\n\x05angle\x18\x04\x20\x01(\x02R\x05angle\"Y\n\
+    \x11DebugMessageEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\ttimestam\
+    p\x12&\n\nbytestring\x18\x02\x20\x01(\tR\nbytestringB\x06\x92?\x03\x08\
+    \x80\x01\",\n\x0cConnectEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\rR\t\
+    timestamp\"/\n\x0fDisconnectEvent\x12\x1c\n\ttimestamp\x18\x01\x20\x01(\
+    \rR\ttimestamp\"D\n\x10ResetPeripherals\x120\n\x13peripheralResetMask\
+    \x18\x02\x20\x01(\rR\x13peripheralResetMask\"S\n\rClientToRobot\x12;\n\n\
+    rpcRequest\x18\x01\x20\x01(\x0b2\x19.linkbot.robot.RpcRequestH\0R\nrpcRe\
+    questB\x05\n\x03arg\"n\n\x16ClientToRobotBroadcast\x12M\n\x10resetPeriph\
+    erals\x18\x01\x20\x01(\x0b2\x1f.linkbot.robot.ResetPeripheralsH\0R\x10re\
+    setPeripheralsB\x05\n\x03arg\"\xc3\x04\n\rRobotToClient\x125\n\x08rpcRep\
+    ly\x18\x01\x20\x01(\x0b2\x17.linkbot.robot.RpcReplyH\0R\x08rpcReply\x12S\
+    \n\x12accelerometerEvent\x18\x02\x20\x01(\x0b2!.linkbot.robot.Accelerome\
+    terEventH\0R\x12accelerometerEvent\x12>\n\x0bbuttonEvent\x18\x03\x20\x01\
+    (\x0b2\x1a.linkbot.robot.ButtonEventH\0R\x0bbuttonEvent\x12A\n\x0cencode\
+    rEvent\x18\x04\x20\x01(\x0b2\x1b.linkbot.robot.EncoderEventH\0R\x0cencod\
+    erEvent\x12;\n\njointEvent\x18\x05\x20\x01(\x0b2\x19.linkbot.robot.Joint\
+    EventH\0R\njointEvent\x12P\n\x11debugMessageEvent\x18\x06\x20\x01(\x0b2\
+    \x20.linkbot.robot.DebugMessageEventH\0R\x11debugMessageEvent\x12A\n\x0c\
+    connectEvent\x18\x07\x20\x01(\x0b2\x1b.linkbot.robot.ConnectEventH\0R\
+    \x0cconnectEvent\x12J\n\x0fdisconnectEvent\x18\x08\x20\x01(\x0b2\x1e.lin\
+    kbot.robot.DisconnectEventH\0R\x0fdisconnectEventB\x05\n\x03arg*-\n\nFor\
+    mFactor\x12\x05\n\x01I\x10\0\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\
+    \x02\x12\n\n\x06DONGLE\x10\x03*8\n\nJointState\x12\t\n\x05COAST\x10\0\
+    \x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05ERROR\
+    \x10\x04*!\n\x06Button\x12\t\n\x05POWER\x10\0\x12\x05\n\x01A\x10\x01\x12\
+    \x05\n\x01B\x10\x02*\x1f\n\x0bButtonState\x12\x06\n\x02UP\x10\0\x12\x08\
+    \n\x04DOWN\x10\x01*E\n\nPeripheral\x12\n\n\x06MOTOR1\x10\0\x12\n\n\x06MO\
+    TOR2\x10\x01\x12\n\n\x06MOTOR3\x10\x02\x12\x07\n\x03LED\x10\x03\x12\n\n\
+    \x06BUZZER\x10\x04\
 ";
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {

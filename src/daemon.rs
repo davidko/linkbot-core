@@ -66,6 +66,13 @@ impl DaemonProxy {
         self.inner.lock().unwrap().get_robot(serial_id, self.clone())
     }
 
+    pub fn acquire_robot<F>(&self, cb: F) -> Result<(), String>
+        where F: FnMut(Option<String>),
+              F: 'static
+    {
+        self.inner.lock().unwrap().acquire_robot(cb)
+    }
+
     /// Instruct the daemon server to send a ConnectSession message to a robot.
     pub fn connect_robot(&mut self, serial_id: &str) -> Result<(), String> {
         self.inner.lock().unwrap().connect_robot(serial_id)
@@ -182,6 +189,25 @@ impl Inner{
         let r = robot::Robot::new_from_daemon(String::from(serial_id), &daemon);
         self.robots.insert(String::from(serial_id), r.clone());
         r
+    }
+
+    /// Get the serial ID of an un-acquired robot. If there are no robots or no acquireable
+    /// robots, the callback is called with "None".
+    pub fn acquire_robot<F>(&mut self, mut cb: F) -> Result<(), String>
+        where F: FnMut(Option<String>),
+              F: 'static
+    {
+        let acquire = daemon_pb::acquireRobotRef_In::new();
+        let mut rpc_request = daemon_pb::RpcRequest::new();
+        rpc_request.set_acquireRobotRef(acquire);
+        self.rpc_request(rpc_request, move |mut reply| {
+            let mut acquire_out = reply.take_acquireRobotRef();
+            if acquire_out.has_serialId() {
+                cb(Some(acquire_out.take_serialId().take_value()));
+            } else {
+                cb(None);
+            }
+        })
     }
 
     pub fn add_robot_refs<F>(&mut self, serial_ids: Vec<String>, mut cb: F) -> Result<(), String>

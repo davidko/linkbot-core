@@ -1253,11 +1253,7 @@ impl ::protobuf::Message for addRobotRefs_Out {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.status = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.status, 1, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -1356,6 +1352,447 @@ impl ::std::fmt::Debug for addRobotRefs_Out {
 }
 
 impl ::protobuf::reflect::ProtobufValue for addRobotRefs_Out {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct acquireRobotRef {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for acquireRobotRef {}
+
+impl acquireRobotRef {
+    pub fn new() -> acquireRobotRef {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static acquireRobotRef {
+        static mut instance: ::protobuf::lazy::Lazy<acquireRobotRef> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const acquireRobotRef,
+        };
+        unsafe {
+            instance.get(acquireRobotRef::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for acquireRobotRef {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for acquireRobotRef {
+    fn new() -> acquireRobotRef {
+        acquireRobotRef::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<acquireRobotRef>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<acquireRobotRef>(
+                    "acquireRobotRef",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for acquireRobotRef {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for acquireRobotRef {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for acquireRobotRef {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct acquireRobotRef_In {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for acquireRobotRef_In {}
+
+impl acquireRobotRef_In {
+    pub fn new() -> acquireRobotRef_In {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static acquireRobotRef_In {
+        static mut instance: ::protobuf::lazy::Lazy<acquireRobotRef_In> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const acquireRobotRef_In,
+        };
+        unsafe {
+            instance.get(acquireRobotRef_In::new)
+        }
+    }
+}
+
+impl ::protobuf::Message for acquireRobotRef_In {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for acquireRobotRef_In {
+    fn new() -> acquireRobotRef_In {
+        acquireRobotRef_In::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<acquireRobotRef_In>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<acquireRobotRef_In>(
+                    "acquireRobotRef_In",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for acquireRobotRef_In {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for acquireRobotRef_In {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for acquireRobotRef_In {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct acquireRobotRef_Out {
+    // message fields
+    serialId: ::protobuf::SingularPtrField<super::commontypes::SerialId>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+// see codegen.rs for the explanation why impl Sync explicitly
+unsafe impl ::std::marker::Sync for acquireRobotRef_Out {}
+
+impl acquireRobotRef_Out {
+    pub fn new() -> acquireRobotRef_Out {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static acquireRobotRef_Out {
+        static mut instance: ::protobuf::lazy::Lazy<acquireRobotRef_Out> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const acquireRobotRef_Out,
+        };
+        unsafe {
+            instance.get(acquireRobotRef_Out::new)
+        }
+    }
+
+    // optional .linkbot.SerialId serialId = 1;
+
+    pub fn clear_serialId(&mut self) {
+        self.serialId.clear();
+    }
+
+    pub fn has_serialId(&self) -> bool {
+        self.serialId.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_serialId(&mut self, v: super::commontypes::SerialId) {
+        self.serialId = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_serialId(&mut self) -> &mut super::commontypes::SerialId {
+        if self.serialId.is_none() {
+            self.serialId.set_default();
+        }
+        self.serialId.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_serialId(&mut self) -> super::commontypes::SerialId {
+        self.serialId.take().unwrap_or_else(|| super::commontypes::SerialId::new())
+    }
+
+    pub fn get_serialId(&self) -> &super::commontypes::SerialId {
+        self.serialId.as_ref().unwrap_or_else(|| super::commontypes::SerialId::default_instance())
+    }
+
+    fn get_serialId_for_reflect(&self) -> &::protobuf::SingularPtrField<super::commontypes::SerialId> {
+        &self.serialId
+    }
+
+    fn mut_serialId_for_reflect(&mut self) -> &mut ::protobuf::SingularPtrField<super::commontypes::SerialId> {
+        &mut self.serialId
+    }
+}
+
+impl ::protobuf::Message for acquireRobotRef_Out {
+    fn is_initialized(&self) -> bool {
+        for v in &self.serialId {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.serialId)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if let Some(ref v) = self.serialId.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if let Some(ref v) = self.serialId.as_ref() {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for acquireRobotRef_Out {
+    fn new() -> acquireRobotRef_Out {
+        acquireRobotRef_Out::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<acquireRobotRef_Out>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::commontypes::SerialId>>(
+                    "serialId",
+                    acquireRobotRef_Out::get_serialId_for_reflect,
+                    acquireRobotRef_Out::mut_serialId_for_reflect,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<acquireRobotRef_Out>(
+                    "acquireRobotRef_Out",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for acquireRobotRef_Out {
+    fn clear(&mut self) {
+        self.clear_serialId();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for acquireRobotRef_Out {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for acquireRobotRef_Out {
     fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
         ::protobuf::reflect::ProtobufValueRef::Message(self)
     }
@@ -1734,11 +2171,7 @@ impl ::protobuf::Message for releaseRobotRefs_Out {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.status = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.status, 1, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -2288,11 +2721,7 @@ impl ::protobuf::Message for transmit_Out {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.status = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.status, 1, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -2672,11 +3101,7 @@ impl ::protobuf::Message for transmitBroadcast_In {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.broadcastMethod = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.broadcastMethod, 1, &mut self.unknown_fields)?
                 },
                 2 => {
                     ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.destinations)?;
@@ -2881,11 +3306,7 @@ impl ::protobuf::Message for transmitBroadcast_Out {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
-                    }
-                    let tmp = is.read_enum()?;
-                    self.status = ::std::option::Option::Some(tmp);
+                    ::protobuf::rt::read_proto2_enum_with_unknown_fields_into(wire_type, is, &mut self.status, 1, &mut self.unknown_fields)?
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -3011,6 +3432,7 @@ pub enum RpcRequest_oneof_arg {
     releaseRobotRefs(releaseRobotRefs_In),
     transmit(transmit_In),
     transmitBroadcast(transmitBroadcast_In),
+    acquireRobotRef(acquireRobotRef_In),
 }
 
 impl RpcRequest {
@@ -3348,6 +3770,55 @@ impl RpcRequest {
             _ => transmitBroadcast_In::default_instance(),
         }
     }
+
+    // optional .linkbot.daemon.acquireRobotRef.In acquireRobotRef = 8;
+
+    pub fn clear_acquireRobotRef(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_acquireRobotRef(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_acquireRobotRef(&mut self, v: acquireRobotRef_In) {
+        self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_acquireRobotRef(&mut self) -> &mut acquireRobotRef_In {
+        if let ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(acquireRobotRef_In::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_acquireRobotRef(&mut self) -> acquireRobotRef_In {
+        if self.has_acquireRobotRef() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            acquireRobotRef_In::new()
+        }
+    }
+
+    pub fn get_acquireRobotRef(&self) -> &acquireRobotRef_In {
+        match self.arg {
+            ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(ref v)) => v,
+            _ => acquireRobotRef_In::default_instance(),
+        }
+    }
 }
 
 impl ::protobuf::Message for RpcRequest {
@@ -3378,6 +3849,11 @@ impl ::protobuf::Message for RpcRequest {
             }
         }
         if let Some(RpcRequest_oneof_arg::transmitBroadcast(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcRequest_oneof_arg::acquireRobotRef(ref v)) = self.arg {
             if !v.is_initialized() {
                 return false;
             }
@@ -3432,6 +3908,12 @@ impl ::protobuf::Message for RpcRequest {
                     }
                     self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::transmitBroadcast(is.read_message()?));
                 },
+                8 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcRequest_oneof_arg::acquireRobotRef(is.read_message()?));
+                },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
                 },
@@ -3470,6 +3952,10 @@ impl ::protobuf::Message for RpcRequest {
                     my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
                 &RpcRequest_oneof_arg::transmitBroadcast(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcRequest_oneof_arg::acquireRobotRef(ref v) => {
                     let len = v.compute_size();
                     my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
@@ -3513,6 +3999,11 @@ impl ::protobuf::Message for RpcRequest {
                 },
                 &RpcRequest_oneof_arg::transmitBroadcast(ref v) => {
                     os.write_tag(7, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcRequest_oneof_arg::acquireRobotRef(ref v) => {
+                    os.write_tag(8, ::protobuf::wire_format::WireTypeLengthDelimited)?;
                     os.write_raw_varint32(v.get_cached_size())?;
                     v.write_to_with_cached_sizes(os)?;
                 },
@@ -3597,6 +4088,11 @@ impl ::protobuf::MessageStatic for RpcRequest {
                     RpcRequest::has_transmitBroadcast,
                     RpcRequest::get_transmitBroadcast,
                 ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, acquireRobotRef_In>(
+                    "acquireRobotRef",
+                    RpcRequest::has_acquireRobotRef,
+                    RpcRequest::get_acquireRobotRef,
+                ));
                 ::protobuf::reflect::MessageDescriptor::new::<RpcRequest>(
                     "RpcRequest",
                     fields,
@@ -3616,6 +4112,7 @@ impl ::protobuf::Clear for RpcRequest {
         self.clear_releaseRobotRefs();
         self.clear_transmit();
         self.clear_transmitBroadcast();
+        self.clear_acquireRobotRef();
         self.unknown_fields.clear();
     }
 }
@@ -3654,6 +4151,7 @@ pub enum RpcReply_oneof_arg {
     releaseRobotRefs(releaseRobotRefs_Out),
     transmit(transmit_Out),
     transmitBroadcast(transmitBroadcast_Out),
+    acquireRobotRef(acquireRobotRef_Out),
 }
 
 impl RpcReply {
@@ -3991,6 +4489,55 @@ impl RpcReply {
             _ => transmitBroadcast_Out::default_instance(),
         }
     }
+
+    // optional .linkbot.daemon.acquireRobotRef.Out acquireRobotRef = 8;
+
+    pub fn clear_acquireRobotRef(&mut self) {
+        self.arg = ::std::option::Option::None;
+    }
+
+    pub fn has_acquireRobotRef(&self) -> bool {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_acquireRobotRef(&mut self, v: acquireRobotRef_Out) {
+        self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(v))
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_acquireRobotRef(&mut self) -> &mut acquireRobotRef_Out {
+        if let ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(_)) = self.arg {
+        } else {
+            self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(acquireRobotRef_Out::new()));
+        }
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_acquireRobotRef(&mut self) -> acquireRobotRef_Out {
+        if self.has_acquireRobotRef() {
+            match self.arg.take() {
+                ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            acquireRobotRef_Out::new()
+        }
+    }
+
+    pub fn get_acquireRobotRef(&self) -> &acquireRobotRef_Out {
+        match self.arg {
+            ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(ref v)) => v,
+            _ => acquireRobotRef_Out::default_instance(),
+        }
+    }
 }
 
 impl ::protobuf::Message for RpcReply {
@@ -4021,6 +4568,11 @@ impl ::protobuf::Message for RpcReply {
             }
         }
         if let Some(RpcReply_oneof_arg::transmitBroadcast(ref v)) = self.arg {
+            if !v.is_initialized() {
+                return false;
+            }
+        }
+        if let Some(RpcReply_oneof_arg::acquireRobotRef(ref v)) = self.arg {
             if !v.is_initialized() {
                 return false;
             }
@@ -4075,6 +4627,12 @@ impl ::protobuf::Message for RpcReply {
                     }
                     self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::transmitBroadcast(is.read_message()?));
                 },
+                8 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    self.arg = ::std::option::Option::Some(RpcReply_oneof_arg::acquireRobotRef(is.read_message()?));
+                },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
                 },
@@ -4113,6 +4671,10 @@ impl ::protobuf::Message for RpcReply {
                     my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
                 &RpcReply_oneof_arg::transmitBroadcast(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &RpcReply_oneof_arg::acquireRobotRef(ref v) => {
                     let len = v.compute_size();
                     my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
                 },
@@ -4156,6 +4718,11 @@ impl ::protobuf::Message for RpcReply {
                 },
                 &RpcReply_oneof_arg::transmitBroadcast(ref v) => {
                     os.write_tag(7, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+                    os.write_raw_varint32(v.get_cached_size())?;
+                    v.write_to_with_cached_sizes(os)?;
+                },
+                &RpcReply_oneof_arg::acquireRobotRef(ref v) => {
+                    os.write_tag(8, ::protobuf::wire_format::WireTypeLengthDelimited)?;
                     os.write_raw_varint32(v.get_cached_size())?;
                     v.write_to_with_cached_sizes(os)?;
                 },
@@ -4240,6 +4807,11 @@ impl ::protobuf::MessageStatic for RpcReply {
                     RpcReply::has_transmitBroadcast,
                     RpcReply::get_transmitBroadcast,
                 ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor::<_, acquireRobotRef_Out>(
+                    "acquireRobotRef",
+                    RpcReply::has_acquireRobotRef,
+                    RpcReply::get_acquireRobotRef,
+                ));
                 ::protobuf::reflect::MessageDescriptor::new::<RpcReply>(
                     "RpcReply",
                     fields,
@@ -4259,6 +4831,7 @@ impl ::protobuf::Clear for RpcReply {
         self.clear_releaseRobotRefs();
         self.clear_transmit();
         self.clear_transmitBroadcast();
+        self.clear_acquireRobotRef();
         self.unknown_fields.clear();
     }
 }
@@ -5763,63 +6336,67 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x83\x01\n\x0caddRobotRefs\x1a<\n\x02In\x126\n\tserialIds\x18\x01\x20\
     \x03(\x0b2\x11.linkbot.SerialIdR\tserialIdsB\x05\x92?\x02\x10\x10\x1a5\n\
     \x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\x16.linkbot.daemon.Status\
-    R\x06status\"\x87\x01\n\x10releaseRobotRefs\x1a<\n\x02In\x126\n\tserialI\
-    ds\x18\x01\x20\x03(\x0b2\x11.linkbot.SerialIdR\tserialIdsB\x05\x92?\x02\
-    \x10\x10\x1a5\n\x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\x16.linkbo\
-    t.daemon.StatusR\x06status\"\xb4\x01\n\x08transmit\x1aq\n\x02In\x123\n\
-    \x0bdestination\x18\x01\x20\x01(\x0b2\x11.linkbot.SerialIdR\x0bdestinati\
-    on\x126\n\x07payload\x18\x02\x20\x01(\x0b2\x1c.linkbot.robot.ClientToRob\
-    otR\x07payload\x1a5\n\x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\x16.\
-    linkbot.daemon.StatusR\x06status\"\x9b\x02\n\x11transmitBroadcast\x1a\
-    \xce\x01\n\x02In\x12I\n\x0fbroadcastMethod\x18\x01\x20\x01(\x0e2\x1f.lin\
-    kbot.daemon.BroadcastMethodR\x0fbroadcastMethod\x12<\n\x0cdestinations\
-    \x18\x02\x20\x03(\x0b2\x11.linkbot.SerialIdR\x0cdestinationsB\x05\x92?\
-    \x02\x10\x08\x12?\n\x07payload\x18\x04\x20\x01(\x0b2%.linkbot.robot.Clie\
-    ntToRobotBroadcastR\x07payload\x1a5\n\x03Out\x12.\n\x06status\x18\x01\
-    \x20\x01(\x0e2\x16.linkbot.daemon.StatusR\x06status\"\x8e\x04\n\nRpcRequ\
-    est\x12\x1c\n\trequestId\x18\x01\x20\x01(\rR\trequestId\x12c\n\x16getDae\
-    monVersionString\x18\x02\x20\x01(\x0b2).linkbot.daemon.getDaemonVersionS\
-    tring.InH\0R\x16getDaemonVersionString\x12K\n\x0egetDongleCount\x18\x03\
-    \x20\x01(\x0b2!.linkbot.daemon.getDongleCount.InH\0R\x0egetDongleCount\
-    \x12E\n\x0caddRobotRefs\x18\x04\x20\x01(\x0b2\x1f.linkbot.daemon.addRobo\
-    tRefs.InH\0R\x0caddRobotRefs\x12Q\n\x10releaseRobotRefs\x18\x05\x20\x01(\
-    \x0b2#.linkbot.daemon.releaseRobotRefs.InH\0R\x10releaseRobotRefs\x129\n\
-    \x08transmit\x18\x06\x20\x01(\x0b2\x1b.linkbot.daemon.transmit.InH\0R\
-    \x08transmit\x12T\n\x11transmitBroadcast\x18\x07\x20\x01(\x0b2$.linkbot.\
-    daemon.transmitBroadcast.InH\0R\x11transmitBroadcastB\x05\n\x03arg\"\x92\
-    \x04\n\x08RpcReply\x12\x1c\n\trequestId\x18\x01\x20\x01(\rR\trequestId\
-    \x12d\n\x16getDaemonVersionString\x18\x02\x20\x01(\x0b2*.linkbot.daemon.\
-    getDaemonVersionString.OutH\0R\x16getDaemonVersionString\x12L\n\x0egetDo\
-    ngleCount\x18\x03\x20\x01(\x0b2\".linkbot.daemon.getDongleCount.OutH\0R\
-    \x0egetDongleCount\x12F\n\x0caddRobotRefs\x18\x04\x20\x01(\x0b2\x20.link\
-    bot.daemon.addRobotRefs.OutH\0R\x0caddRobotRefs\x12R\n\x10releaseRobotRe\
-    fs\x18\x05\x20\x01(\x0b2$.linkbot.daemon.releaseRobotRefs.OutH\0R\x10rel\
-    easeRobotRefs\x12:\n\x08transmit\x18\x06\x20\x01(\x0b2\x1c.linkbot.daemo\
-    n.transmit.OutH\0R\x08transmit\x12U\n\x11transmitBroadcast\x18\x07\x20\
-    \x01(\x0b2%.linkbot.daemon.transmitBroadcast.OutH\0R\x11transmitBroadcas\
-    tB\x05\n\x03arg\"|\n\x13ReceiveTransmission\x12-\n\x08serialId\x18\x01\
-    \x20\x01(\x0b2\x11.linkbot.SerialIdR\x08serialId\x126\n\x07payload\x18\
-    \x02\x20\x01(\x0b2\x1c.linkbot.robot.RobotToClientR\x07payload\"?\n\x0bD\
-    ongleEvent\x120\n\x0ffirmwareVersion\x18\x01\x20\x01(\tR\x0ffirmwareVers\
-    ionB\x06\x92?\x03\x08\x80\x01\"m\n\nRobotEvent\x12-\n\x08serialId\x18\
-    \x01\x20\x01(\x0b2\x11.linkbot.SerialIdR\x08serialId\x120\n\x0ffirmwareV\
-    ersion\x18\x02\x20\x01(\tR\x0ffirmwareVersionB\x06\x92?\x03\x08\x80\x01\
-    \"U\n\x0eClientToDaemon\x12<\n\nrpcRequest\x18\x01\x20\x01(\x0b2\x1a.lin\
-    kbot.daemon.RpcRequestH\0R\nrpcRequestB\x05\n\x03arg\"\x8f\x02\n\x0eDaem\
-    onToClient\x126\n\x08rpcReply\x18\x01\x20\x01(\x0b2\x18.linkbot.daemon.R\
-    pcReplyH\0R\x08rpcReply\x12?\n\x07receive\x18\x02\x20\x01(\x0b2#.linkbot\
-    .daemon.ReceiveTransmissionH\0R\x07receive\x12?\n\x0bdongleEvent\x18\x03\
-    \x20\x01(\x0b2\x1b.linkbot.daemon.DongleEventH\0R\x0bdongleEvent\x12<\n\
-    \nrobotEvent\x18\x04\x20\x01(\x0b2\x1a.linkbot.daemon.RobotEventH\0R\nro\
-    botEventB\x05\n\x03arg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\0\x12\
-    \x16\n\x12CANNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10DONGLE_NOT_FOUND\x10\
-    \x02\x12\x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SE\
-    RIALID\x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12DAEMON\
-    _UNAVAILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15IN\
-    COMPATIBLE_FIRMWARE\x10\t\x12\x13\n\x0fBUFFER_OVERFLOW\x10\n\x12\x0f\n\
-    \x0bOTHER_ERROR\x10\x0b*K\n\x0fBroadcastMethod\x12\r\n\tBROADCAST\x10\0\
-    \x12\x13\n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\
-    \x02\
+    R\x06status\"M\n\x0facquireRobotRef\x1a\x04\n\x02In\x1a4\n\x03Out\x12-\n\
+    \x08serialId\x18\x01\x20\x01(\x0b2\x11.linkbot.SerialIdR\x08serialId\"\
+    \x87\x01\n\x10releaseRobotRefs\x1a<\n\x02In\x126\n\tserialIds\x18\x01\
+    \x20\x03(\x0b2\x11.linkbot.SerialIdR\tserialIdsB\x05\x92?\x02\x10\x10\
+    \x1a5\n\x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\x16.linkbot.daemon\
+    .StatusR\x06status\"\xb4\x01\n\x08transmit\x1aq\n\x02In\x123\n\x0bdestin\
+    ation\x18\x01\x20\x01(\x0b2\x11.linkbot.SerialIdR\x0bdestination\x126\n\
+    \x07payload\x18\x02\x20\x01(\x0b2\x1c.linkbot.robot.ClientToRobotR\x07pa\
+    yload\x1a5\n\x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\x16.linkbot.d\
+    aemon.StatusR\x06status\"\x9b\x02\n\x11transmitBroadcast\x1a\xce\x01\n\
+    \x02In\x12I\n\x0fbroadcastMethod\x18\x01\x20\x01(\x0e2\x1f.linkbot.daemo\
+    n.BroadcastMethodR\x0fbroadcastMethod\x12<\n\x0cdestinations\x18\x02\x20\
+    \x03(\x0b2\x11.linkbot.SerialIdR\x0cdestinationsB\x05\x92?\x02\x10\x08\
+    \x12?\n\x07payload\x18\x04\x20\x01(\x0b2%.linkbot.robot.ClientToRobotBro\
+    adcastR\x07payload\x1a5\n\x03Out\x12.\n\x06status\x18\x01\x20\x01(\x0e2\
+    \x16.linkbot.daemon.StatusR\x06status\"\xde\x04\n\nRpcRequest\x12\x1c\n\
+    \trequestId\x18\x01\x20\x01(\rR\trequestId\x12c\n\x16getDaemonVersionStr\
+    ing\x18\x02\x20\x01(\x0b2).linkbot.daemon.getDaemonVersionString.InH\0R\
+    \x16getDaemonVersionString\x12K\n\x0egetDongleCount\x18\x03\x20\x01(\x0b\
+    2!.linkbot.daemon.getDongleCount.InH\0R\x0egetDongleCount\x12E\n\x0caddR\
+    obotRefs\x18\x04\x20\x01(\x0b2\x1f.linkbot.daemon.addRobotRefs.InH\0R\
+    \x0caddRobotRefs\x12Q\n\x10releaseRobotRefs\x18\x05\x20\x01(\x0b2#.linkb\
+    ot.daemon.releaseRobotRefs.InH\0R\x10releaseRobotRefs\x129\n\x08transmit\
+    \x18\x06\x20\x01(\x0b2\x1b.linkbot.daemon.transmit.InH\0R\x08transmit\
+    \x12T\n\x11transmitBroadcast\x18\x07\x20\x01(\x0b2$.linkbot.daemon.trans\
+    mitBroadcast.InH\0R\x11transmitBroadcast\x12N\n\x0facquireRobotRef\x18\
+    \x08\x20\x01(\x0b2\".linkbot.daemon.acquireRobotRef.InH\0R\x0facquireRob\
+    otRefB\x05\n\x03arg\"\xe3\x04\n\x08RpcReply\x12\x1c\n\trequestId\x18\x01\
+    \x20\x01(\rR\trequestId\x12d\n\x16getDaemonVersionString\x18\x02\x20\x01\
+    (\x0b2*.linkbot.daemon.getDaemonVersionString.OutH\0R\x16getDaemonVersio\
+    nString\x12L\n\x0egetDongleCount\x18\x03\x20\x01(\x0b2\".linkbot.daemon.\
+    getDongleCount.OutH\0R\x0egetDongleCount\x12F\n\x0caddRobotRefs\x18\x04\
+    \x20\x01(\x0b2\x20.linkbot.daemon.addRobotRefs.OutH\0R\x0caddRobotRefs\
+    \x12R\n\x10releaseRobotRefs\x18\x05\x20\x01(\x0b2$.linkbot.daemon.releas\
+    eRobotRefs.OutH\0R\x10releaseRobotRefs\x12:\n\x08transmit\x18\x06\x20\
+    \x01(\x0b2\x1c.linkbot.daemon.transmit.OutH\0R\x08transmit\x12U\n\x11tra\
+    nsmitBroadcast\x18\x07\x20\x01(\x0b2%.linkbot.daemon.transmitBroadcast.O\
+    utH\0R\x11transmitBroadcast\x12O\n\x0facquireRobotRef\x18\x08\x20\x01(\
+    \x0b2#.linkbot.daemon.acquireRobotRef.OutH\0R\x0facquireRobotRefB\x05\n\
+    \x03arg\"|\n\x13ReceiveTransmission\x12-\n\x08serialId\x18\x01\x20\x01(\
+    \x0b2\x11.linkbot.SerialIdR\x08serialId\x126\n\x07payload\x18\x02\x20\
+    \x01(\x0b2\x1c.linkbot.robot.RobotToClientR\x07payload\"?\n\x0bDongleEve\
+    nt\x120\n\x0ffirmwareVersion\x18\x01\x20\x01(\tR\x0ffirmwareVersionB\x06\
+    \x92?\x03\x08\x80\x01\"m\n\nRobotEvent\x12-\n\x08serialId\x18\x01\x20\
+    \x01(\x0b2\x11.linkbot.SerialIdR\x08serialId\x120\n\x0ffirmwareVersion\
+    \x18\x02\x20\x01(\tR\x0ffirmwareVersionB\x06\x92?\x03\x08\x80\x01\"U\n\
+    \x0eClientToDaemon\x12<\n\nrpcRequest\x18\x01\x20\x01(\x0b2\x1a.linkbot.\
+    daemon.RpcRequestH\0R\nrpcRequestB\x05\n\x03arg\"\x8f\x02\n\x0eDaemonToC\
+    lient\x126\n\x08rpcReply\x18\x01\x20\x01(\x0b2\x18.linkbot.daemon.RpcRep\
+    lyH\0R\x08rpcReply\x12?\n\x07receive\x18\x02\x20\x01(\x0b2#.linkbot.daem\
+    on.ReceiveTransmissionH\0R\x07receive\x12?\n\x0bdongleEvent\x18\x03\x20\
+    \x01(\x0b2\x1b.linkbot.daemon.DongleEventH\0R\x0bdongleEvent\x12<\n\nrob\
+    otEvent\x18\x04\x20\x01(\x0b2\x1a.linkbot.daemon.RobotEventH\0R\nrobotEv\
+    entB\x05\n\x03arg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\0\x12\x16\n\
+    \x12CANNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10DONGLE_NOT_FOUND\x10\x02\x12\
+    \x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SERIALID\
+    \x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12DAEMON_UNAVA\
+    ILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15INCOMPAT\
+    IBLE_FIRMWARE\x10\t\x12\x13\n\x0fBUFFER_OVERFLOW\x10\n\x12\x0f\n\x0bOTHE\
+    R_ERROR\x10\x0b*K\n\x0fBroadcastMethod\x12\r\n\tBROADCAST\x10\0\x12\x13\
+    \n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\x02\
 ";
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {
