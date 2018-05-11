@@ -197,14 +197,17 @@ impl Inner{
         where F: FnMut(Option<String>),
               F: 'static
     {
+        debug!("Acquiring robot id...");
         let acquire = daemon_pb::acquireRobotRef_In::new();
         let mut rpc_request = daemon_pb::RpcRequest::new();
         rpc_request.set_acquireRobotRef(acquire);
         self.rpc_request(rpc_request, move |mut reply| {
             let mut acquire_out = reply.take_acquireRobotRef();
             if acquire_out.has_serialId() {
+                debug!("Acquiring robot id... Got an ID");
                 cb(Some(acquire_out.take_serialId().take_value()));
             } else {
+                debug!("Acquiring robot id... Got None");
                 cb(None);
             }
         })
