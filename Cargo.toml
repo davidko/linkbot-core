@@ -5,9 +5,9 @@ authors = ["David Ko <david@barobo.com>"]
 build = false
 
 [dependencies]
-protobuf = "*"
+protobuf = "~1.5"
 log = "*"
 rand = "*"
 
 [build-dependencies]
-protoc-rust = "*"
+protoc-rust = "~1.5"
